@@ -1,0 +1,48 @@
+body{
+   overflow-x: hidden;
+}
+
+.img-container {
+   width: 500vw;
+}
+
+.mem-img {
+   background-color: #7bb2f3;
+   float: left;
+   width: 100vw;
+   height: 75vh;
+   transition: all 0.8s;
+   text-align: center;
+}
+
+img{
+   height: 70vh;
+   margin: 20px;
+   border-radius: 20px;
+}
+
+.img-btn {
+   margin-top: 30px;
+   padding: 1px;
+   padding-left: 15px;
+   padding-right: 15px;
+   border-radius: 10px;
+   background-color: cornflowerblue;
+   border: none;
+}
+
+.pre, .next{
+   font-size: 50px;
+   position: fixed;
+   top: 30%;
+   background-color: #7bb2f3;
+   opacity: 0.8;
+}
+
+.pre{
+   left: 10%;
+}
+
+.next{
+   right: 10%;
+}

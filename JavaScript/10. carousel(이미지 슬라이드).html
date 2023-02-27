@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+   <link rel="stylesheet" href="./css/10. style.css">
+   <title>carousel</title>
+</head>
+
+<body>
+   <div class="img-container">
+      <div class="mem-img">
+         <img src="./img/minji_omg.jfif" alt="">
+      </div>
+      <div class="mem-img">
+         <img src="./img/hanni_omg.jfif" alt="">
+      </div>
+      <div class="mem-img">
+         <img src="./img/danielle_omg.jfif" alt="">
+      </div>
+      <div class="mem-img">
+         <img src="./img/haerin_omg.jfif" alt="">
+      </div>
+      <div class="mem-img">
+         <img src="./img/hyein_omg.jfif" alt="">
+      </div>
+   </div>
+   <div class="mt-4" style="text-align: center;">
+      <button class="img-btn pre" data-num="-1">◀</button>
+      <button class="img-btn" data-num="0">민지</button>
+      <button class="img-btn" data-num="1">하니</button>
+      <button class="img-btn" data-num="2">다니엘</button>
+      <button class="img-btn" data-num="3">해린</button>
+      <button class="img-btn" data-num="4">혜인</button>
+      <button class="img-btn next" data-num="+1">▶</button>
+   </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+      </script>
+   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
+      </script>
+   <script>
+      var pre = 0;
+      
+      $('.img-btn').click(function (e) {
+         let len = e.target.dataset.num;
+
+         if (len === '-1') {
+            if(pre !== 0){
+               $('.mem-img').css('transform', `translateX(${pre + 100}vw)`);
+               pre += 100;
+            }
+         }
+         else if (len === '+1') {
+            if(pre > -400){
+               $('.mem-img').css('transform', `translateX(${pre - 100}vw)`);
+               pre -= 100;
+            }
+         }
+         else {
+            $('.mem-img').css('transform', `translateX(-${len * 100}vw)`);
+            pre = -(len*100);
+         }
+      })
+
+      function 함수(price, first){
+         price -= (price * 0.1);
+         if(first === true)
+            price -= 1.5;
+         
+         return parseFloat(price.toFixed(3));
+      }
+      console.log(함수(10.3, true));
+   </script>
+</body>
+
+</html>

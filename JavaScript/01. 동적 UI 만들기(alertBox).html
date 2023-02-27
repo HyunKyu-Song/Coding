@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./css/01. style.css">
+   <title>동적 UI 만들기</title>
+</head>
+
+<body>
+   <h1 class="alert">
+      <p class="text" style="display:inline-block"></p>
+      <button onclick="alertBox ('none')">닫기</button>
+   </h1>
+   <button onclick="alertBox('block', '아이디')">아이디</button>
+   <button onclick="alertBox('block', '비번')">비번</button>
+
+   <script>
+      function alertBox(inp1, inp2) {
+         document.querySelector('.alert').style.display = inp1;
+         document.querySelector('.text').innerHTML = `${inp2} 입력하세요!!`;
+      }
+   </script>
+</body>
+
+</html>

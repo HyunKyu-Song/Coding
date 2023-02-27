@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./css/06. style.css">
+   <title>Dark Mode 만들기</title>
+</head>
+
+<body>
+   <button class="mode">Light</button>
+
+   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
+      </script>
+   <script>
+      var cnt = 0;
+
+      $('.mode').click(function(){
+         cnt++;
+
+         if(cnt % 2 == 0){
+            $('.mode').html('Light');
+            $('.mode').css('background-color', '#eee');
+            $('.mode').css('color', 'black');
+         }
+         else{
+            $('.mode').html('Dark');
+            $('.mode').css('background-color', 'black');
+            $('.mode').css('color', 'yellow');
+         }
+      })
+   </script>
+</body>
+
+</html>

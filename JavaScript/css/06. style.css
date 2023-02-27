@@ -1,0 +1,9 @@
+.mode{
+   padding: 10px;
+   padding-left: 20px;
+   padding-right: 20px;
+   background-color: #eee;
+   border-radius: 10px;
+   border: none;
+   cursor: pointer;
+}
