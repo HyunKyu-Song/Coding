@@ -15,6 +15,7 @@
       <div class="row card-container"></div>
       <div class="text-center my-4">
          <button class="btn btn-success more">more</button>
+         <button class="btn btn-primary sort">sort</button>
       </div>
    </div>
 
@@ -28,6 +29,7 @@
       </script>
 
    <script>
+      var arr = [];
       var newjeans = [
          {
             id: 0,
@@ -55,34 +57,35 @@
             age: 16,
          }
       ];
-      var lesserafim = [
-         {
-            id: 5,
-            name: "사쿠라",
-            age: 26,
-         },
-         {
-            id: 6,
-            name: "김채원",
-            age: 24,
-         },
-         {
-            id: 7,
-            name: "허윤진",
-            age: 22,
-         },
-         {
-            id: 8,
-            name: "카즈하",
-            age: 21,
-         },
-         {
-            id: 9,
-            name: "홍은채",
-            age: 18,
-         }
-      ]
-
+      // var lesserafim = [
+      //    {
+      //       id: 5,
+      //       name: "사쿠라",
+      //       age: 26,
+      //    },
+      //    {
+      //       id: 6,
+      //       name: "김채원",
+      //       age: 24,
+      //    },
+      //    {
+      //       id: 7,
+      //       name: "허윤진",
+      //       age: 22,
+      //    },
+      //    {
+      //       id: 8,
+      //       name: "카즈하",
+      //       age: 21,
+      //    },
+      //    {
+      //       id: 9,
+      //       name: "홍은채",
+      //       age: 18,
+      //    }
+      // ]
+      
+      console.log(newjeans);
       newjeans.map(function (data, i) {
          var card = `
             <div class="col-sm-4 member">
@@ -90,23 +93,69 @@
                <h5>이름 ${data.name}</h5>
                <p>나이: ${data.age}</p>
             </div>`
-
          $('.card-container').append(card);
+         arr.push(data.age);
       })
 
+      cnt = 0;
       $('.more').click(function () {
-         lesserafim.map(function (data, i) {
-            var card = `
-            <div class="col-sm-4 member">
-               <img src="./img/${data.name}.jfif" class="mt-4 w-50">
-               <h5>이름 ${data.name}</h5>
-               <p>나이: ${data.age}</p>
-            </div>`
-
-            $('.card-container').append(card);
-         })
+         cnt++;
+         if (cnt == 1) {
+            $.get('https://hyunkyu-song.github.io/girlgroup/lesserafim2.json')
+               .done(function (data) {
+                  data.map(function (item, i) {if (i < 3) {더보기(item, i);}})
+               })
+         }
+         else if (cnt == 2) {
+            $.get('https://hyunkyu-song.github.io/girlgroup/lesserafim2.json')
+               .done(function (data) {
+                  data.map(function (item, i) {if (i >= 3) {더보기(item, i);}})
+               })
+            $('.more').remove();
+         }
       })
 
+      $('.sort').click(function(){
+         // var copy = [...newjeans];
+      //    var h = newjeans.sort(function(a, b){
+      //       return a.age - b.age
+      //    })
+      //    $('.row').html('');
+      //    h.map(function (data, i) {
+      //    var card = `
+      //       <div class="col-sm-4 member">
+      //          <img src="./img/${data.name}_omg.jfif" class="mt-4 w-50">
+      //          <h5>이름 ${data.name}</h5>
+      //          <p>나이: ${data.age}</p>
+      //       </div>`
+      //    $('.card-container').append(card);
+      //    arr.push(data.age);
+      // })
+
+      //    console.log(h);
+         console.log(newjeans);
+         console.log(newjeans.sort(function(a, b){
+            if(a.name < b.name){
+               console.log(`a<b = ${a.name}, ${b.name}`);
+               return a.name;
+            }
+            else{
+               console.log(`a>b = ${a.name}, ${b.name}`);
+               return b.name;
+            }
+         }));
+         
+      })
+
+      function 더보기(inp1, inp2) {
+         var card = `
+            <div class="col-sm-4 member">
+               <img src="./img/${inp1.name}.jfif" class="mt-4 w-50">
+               <h5>이름 ${inp1.name}</h5>
+               <p>나이: ${inp1.age}</p>
+            </div>`
+         $('.card-container').append(card);
+      }
    </script>
 </body>
 <script>
