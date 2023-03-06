@@ -64,34 +64,7 @@
             age: 16,
          }
       ];
-      // var lesserafim = [
-      //    {
-      //       id: 5,
-      //       name: "사쿠라",
-      //       age: 26,
-      //    },
-      //    {
-      //       id: 6,
-      //       name: "김채원",
-      //       age: 24,
-      //    },
-      //    {
-      //       id: 7,
-      //       name: "허윤진",
-      //       age: 22,
-      //    },
-      //    {
-      //       id: 8,
-      //       name: "카즈하",
-      //       age: 21,
-      //    },
-      //    {
-      //       id: 9,
-      //       name: "홍은채",
-      //       age: 18,
-      //    }
-      // ]
-
+      
       newjeans.map(function (data, i) {
          var card = `
             <div class="col-sm-4 member">
@@ -122,23 +95,31 @@
       })
 
       $('.good').click(function (e) {
+         var element = e.target.previousElementSibling.previousElementSibling;
+         // var element = $(e.target).siblings('h5').text();
+         var local = localStorage.getItem('cart');
+
          $('.alert').css('display', 'block');
 
          setTimeout(function(){
             $('.alert').css('display', 'none');
          }, 1000);
 
-         var element = e.target.previousElementSibling.previousElementSibling;
-         console.log($(element).val());
-         // $(element).html('123');
 
-         var local = localStorage.getItem('cart');
+         if(local === null){
+            // console.log('비었음');
+            var arr = [$(element).html()];
+            var newArr = JSON.stringify(arr);
+            localStorage.setItem('cart', newArr);
+         }
+         else{
+            var data = JSON.parse(localStorage.getItem('cart'));
 
-         // if(local === null){
-         //    console.log('비었음');
-         //    localStorage.setItem('cart', 'e.target.previousElementSibling.previousElementSibling');
-         // }
-         
+            if(data.includes($(element).html()) === false){
+               data.push($(element).html());
+               localStorage.setItem('cart', JSON.stringify(data));
+            }
+         }
       })
 
       function 더보기(inp1, inp2) {
@@ -152,9 +133,5 @@
       }
    </script>
 </body>
-<script>
-
-</script>
-
 
 </html>
