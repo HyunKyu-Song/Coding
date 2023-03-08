@@ -1,0 +1,7 @@
+.main-container{
+   display: flex;
+}
+
+.card-title{
+   font-weight: bold;
+}
