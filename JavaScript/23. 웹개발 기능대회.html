@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+   <link rel="stylesheet" href="./css/23. style.css">
+   <title>웹개발 기능대회</title>
+</head>
+
+<body>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="#">LE SSERAFIM</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Store</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">SNS</a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+
+   <input type="text" class="search m-4" placeholder="검색어입력">
+
+   <div class="main-container">
+
+   </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+      </script>
+   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
+      </script>
+   <script>
+      var cnt = [];
+      $.get('./lesserafim2.json')
+         .done(function (data) {
+            data.forEach(function (item, i) {
+               cnt.push(data[i].좋아요);
+               var profile =
+                  `<div class="card m-4 text-center" style="width: 25rem;">
+                     <img src="./img/${data[i].photo}" class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">${data[i].name}</h5>
+                        <h6 class="card-text">
+                           나이: ${data[i].age}
+                        <h6/>
+                        <h6 class="card-text">
+                           국적: ${data[i].from}
+                        </h6>
+                        <button class="btn btn-dark good" data-num="${i}">좋아요🤍</button>
+                     </div>
+                  </div>`
+               $('.main-container').append(profile);
+            });
+
+            $('.good').click(function (e) {
+               cnt[e.target.dataset.num]++;
+               if(cnt[e.target.dataset.num] % 2 == 0){
+                  $(e.target).html('좋아요🤍');
+               }
+               else{
+                  $(e.target).html('좋아요❤');
+               }
+            })
+         })
+         .fail(function () {
+            console.log('실패함');
+         })
+
+   </script>
+</body>
+
+</html>

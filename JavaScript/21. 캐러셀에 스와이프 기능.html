@@ -17,16 +17,16 @@
          <img src="./img/minji_omg.jfif" alt="" draggable="false">
       </div>
       <div class="mem-img">
-         <img src="./img/hanni_omg.jfif" alt="">
+         <img src="./img/hanni_omg.jfif" alt="" draggable="false">
       </div>
       <div class="mem-img">
-         <img src="./img/danielle_omg.jfif" alt="">
+         <img src="./img/danielle_omg.jfif" alt="" draggable="false">
       </div>
       <div class="mem-img">
-         <img src="./img/haerin_omg.jfif" alt="">
+         <img src="./img/haerin_omg.jfif" alt="" draggable="false">
       </div>
       <div class="mem-img">
-         <img src="./img/hyein_omg.jfif" alt="">
+         <img src="./img/hyein_omg.jfif" alt="" draggable="false">
       </div>
    </div>
    <div class="mt-4" style="text-align: center;">
@@ -46,46 +46,55 @@
       integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
       </script>
    <script>
-      var now=0, n=0, res=0, a=0;
+      var 시작좌표 = 0, res = 0, 누름 = 0;
 
-      $('img').mousemove(function(e){
-         res = e.clientX - n;
+      $('img').mousemove(function (e) {
+         res = e.clientX - 시작좌표;
 
-         if(a === 1){
+         if (누름 === 1) {
             $(e.target).css('transform', `translateX(${res}px)`);
+            console.log(res);
          }
-         console.log(res);
       })
 
-      $('img').mousedown(function(e){
-         n = e.clientX;
-         a = 1;
+      $('img').mousedown(function (e) {
+         시작좌표 = e.clientX;
+         누름 = 1;
+         console.log('누름');
       })
-      
-      $('img').mouseup(function(e){
-         a = 0;
+
+      $('img').mouseup(function (e) {
+         누름 = 0;
+         console.log('안 누름');
+         
+         if (res < -200) {
+            $('.mem-img').css('transform', `translateX(-${100}vw)`);
+         }
+         else{
+            $(e.target).css('transform', `translateX(0vw)`);
+         }
       })
 
       var pre = 0;
-      
+
       $('.img-btn').click(function (e) {
          let len = e.target.dataset.num;
 
          if (len === '-1') {
-            if(pre !== 0){
+            if (pre !== 0) {
                $('.mem-img').css('transform', `translateX(${pre + 100}vw)`);
                pre += 100;
             }
          }
          else if (len === '+1') {
-            if(pre > -400){
+            if (pre > -400) {
                $('.mem-img').css('transform', `translateX(${pre - 100}vw)`);
                pre -= 100;
             }
          }
          else {
             $('.mem-img').css('transform', `translateX(-${len * 100}vw)`);
-            pre = -(len*100);
+            pre = -(len * 100);
          }
       })
    </script>
