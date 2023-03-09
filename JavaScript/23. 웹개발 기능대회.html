@@ -36,9 +36,13 @@
    </nav>
 
    <input type="text" class="search m-4" placeholder="검색어입력">
-
-   <div class="main-container">
-
+   <!-- <button class="a">cnt</button> -->
+   <div class="main-container"></div>
+   <div class="main-list">
+      <h4 style="padding: 30px; font-weight: bold;">좋아요 List</h4>
+      <div class="list-content mx-4">
+         <p class="drag-text">여기로 드래그</p>
+      </div>
    </div>
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -49,6 +53,12 @@
       </script>
    <script>
       var cnt = [];
+      var arrSearch = [];
+
+      // $('.a').click(function(){
+      //    console.log(cnt);
+      // })
+
       $.get('./lesserafim2.json')
          .done(function (data) {
             data.forEach(function (item, i) {
@@ -70,20 +80,109 @@
                $('.main-container').append(profile);
             });
 
+            $('.search').on('input', function () {
+               data.forEach(function (item, i) {
+                  if (data[i].name === $('.search').val()) {
+                     console.log("이름 있음");
+                     $('.main-container').html('');
+
+                     var profile =
+                        `<div class="card m-4 text-center" style="width: 25rem;">
+                     <img src="./img/${data[i].photo}" class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title" style="color:coral;">${data[i].name}</h5>
+                        <h6 class="card-text">
+                           나이: ${data[i].age}
+                        <h6/>
+                        <h6 class="card-text">
+                           국적: ${data[i].from}
+                        </h6>
+                        <button class="btn btn-dark good" data-num="${i}">좋아요🤍</button>
+                     </div>
+                  </div>`
+                     $('.main-container').append(profile);
+                  }
+                  else if (data[i].age === parseInt($('.search').val())) {
+                     console.log("age 있음");
+                     $('.main-container').html('');
+
+                     var profile =
+                        `<div class="card m-4 text-center" style="width: 25rem;">
+                     <img src="./img/${data[i].photo}" class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">${data[i].name}</h5>
+                        <h6 class="card-text" style="color:coral;">
+                           나이: ${data[i].age}
+                        <h6/>
+                        <h6 class="card-text">
+                           국적: ${data[i].from}
+                        </h6>
+                        <button class="btn btn-dark good" data-num="${i}">좋아요🤍</button>
+                     </div>
+                  </div>`
+                     $('.main-container').append(profile);
+                  }
+                  else if (data[i].from.includes($('.search').val())) {
+                     console.log("from 있음");
+                     arrSearch.push(i);
+                     $('.main-container').html('');
+
+                     var profile =
+                        `<div class="card m-4 text-center" style="width: 25rem;">
+                     <img src="./img/${data[i].photo}" class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">${data[i].name}</h5>
+                        <h6 class="card-text">
+                           나이: ${data[i].age}
+                        <h6/>
+                        <h6 class="card-text" style="color:coral;">
+                           국적: ${data[i].from}
+                        </h6>
+                        <button class="btn btn-dark good" data-num="${i}">좋아요🤍</button>
+                     </div>
+                  </div>`
+                     $('.main-container').append(profile);
+                  }
+               })
+
+               if ("" === $('.search').val()) {
+                  console.log("비었음");
+                  $('.main-container').html('');
+                  data.forEach(function (item, i) {
+                     cnt.push(data[i].좋아요);
+                     var profile =
+                        `<div class="card m-4 text-center" style="width: 25rem;">
+                     <img src="./img/${data[i].photo}" class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">${data[i].name}</h5>
+                        <h6 class="card-text">
+                           나이: ${data[i].age}
+                        <h6/>
+                        <h6 class="card-text">
+                           국적: ${data[i].from}
+                        </h6>
+                        <button class="btn btn-dark good" data-num="${i}">좋아요🤍</button>
+                     </div>
+                  </div>`
+                     $('.main-container').append(profile);
+                  });
+               }
+            })
+
             $('.good').click(function (e) {
                cnt[e.target.dataset.num]++;
-               if(cnt[e.target.dataset.num] % 2 == 0){
+               if (cnt[e.target.dataset.num] % 2 == 0) {
                   $(e.target).html('좋아요🤍');
                }
-               else{
+               else {
                   $(e.target).html('좋아요❤');
                }
+               console.log(cnt);
             })
          })
          .fail(function () {
             console.log('실패함');
          })
-
    </script>
 </body>
 
