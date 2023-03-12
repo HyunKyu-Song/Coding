@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 app.set('view engine', 'ejs');
 
 var db;
-MongoClient.connect('mongodb+srv://song0726:song033634120@cluster0.jkh1uqu.mongodb.net/?retryWrites=true&w=majority', {useUnifiedTopology: true}, function (err, client) {
+MongoClient.connect('mongodb+srv://song0726:song033634120@cluster0.jkh1uqu.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (err, client) {
    if (err) return console.log(err);
    db = client.db('todolist');
 
@@ -15,8 +15,12 @@ MongoClient.connect('mongodb+srv://song0726:song033634120@cluster0.jkh1uqu.mongo
 })
 
 app.get('/', function (req, res) {
-   db.collection('post').findOne({work: '공부'}, function(err, result){
-      res.render('list.ejs', {posts : result});
+   res.render('index.ejs');
+})
+
+app.get('/list', function (req, res) {
+   db.collection('post').find().toArray(function (err, result) {
+      res.render('list.ejs', { posts: result });
       console.log(result);
    })
 })
@@ -26,6 +30,21 @@ app.get('/write', function (req, res) {
 })
 
 app.post('/add', function (req, res) {
-   db.collection('post').insertOne({_id : 2, work : req.body.todayWork, content : req.body.detailContent});
-   res.send('전송완료');
+   db.collection('cnt').findOne({ name: '게시물 갯수' }, function (err, result) {
+      db.collection('post').insertOne({ _id: result.total, work: req.body.Work, content: req.body.Content, date: req.body.date }, function (err, result) {
+         db.collection('cnt').updateOne({ name: '게시물 갯수' }, { $inc: { total: 1 } }, function (err, result) {
+            if (err) return console.log(err);
+            res.redirect('/write');
+         });
+      });
+   });
 })
+
+app.delete('/delete', function(req, res){
+   // console.log(parseInt(req.body._id));
+   req.body._id = parseInt(req.body._id);
+   db.collection('post').deleteOne({_id : req.body._id}, function(err, result){
+      res.send('삭제완료');
+   })
+})
+
