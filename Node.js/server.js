@@ -3,6 +3,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 const MongoClient = require('mongodb').MongoClient;
 app.set('view engine', 'ejs');
+app.use('/public', express.static('public'));
 
 var db;
 MongoClient.connect('mongodb+srv://song0726:song033634120@cluster0.jkh1uqu.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (err, client) {
@@ -21,7 +22,7 @@ app.get('/', function (req, res) {
 app.get('/list', function (req, res) {
    db.collection('post').find().toArray(function (err, result) {
       res.render('list.ejs', { posts: result });
-      console.log(result);
+      // console.log(result);
    })
 })
 
@@ -40,11 +41,28 @@ app.post('/add', function (req, res) {
    });
 })
 
-app.delete('/delete', function(req, res){
-   // console.log(parseInt(req.body._id));
-   req.body._id = parseInt(req.body._id);
-   db.collection('post').deleteOne({_id : req.body._id}, function(err, result){
-      res.send('삭제완료');
+app.delete('/delete/:id', function(req, res){
+   db.collection('post').deleteOne({_id : parseInt(req.params.id)}, function(err, result){
+      console.log('삭제완료');
+      res.status(200).send({message : '성공했습니다'});
+      // res.status(400).send({message : '실패했습니다'});
+   })
+})
+// app.delete('/delete', function(req, res){
+//    // console.log(parseInt(req.body._id));
+//    req.body._id = parseInt(req.body._id);
+//    db.collection('post').deleteOne({_id : req.body._id}, function(err, result){
+//       console.log('삭제완료');
+//       res.status(200).send({message : '성공했습니다'});
+//       // res.status(400).send({message : '실패했습니다'});
+//    })
+// })
+
+
+app.get('/detail/:id', function(req, res){
+   db.collection('post').findOne({_id : parseInt(req.params.id)}, function(err, result){
+      res.render('detail.ejs', { posts : result });
+      // console.log(result);
    })
 })
 
