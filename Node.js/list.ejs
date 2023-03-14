@@ -28,7 +28,10 @@
                         </p>
                      </a>
                   </div>
-                  <button class="btn btn-outline-danger" data-num="<%= posts[i]._id %>">Delete</button>
+                  <!-- <a href="/edit/<%= posts[i]._id %>" style="text-decoration: none;">
+                     <button class="btn btn-outline-warning">Update</button>
+                  </a> -->
+                  <button class="del btn btn-outline-danger" data-num="<%= posts[i]._id %>">Delete</button>
                </li>
                <% } %>
          </ol>
@@ -41,7 +44,7 @@
          integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
          </script>
       <script>
-         $('.btn').click(function (e) {
+         $('.del').click(function (e) {
             $.ajax({
                method: 'DELETE',
                url: `/delete/${e.target.dataset.num}`
@@ -54,8 +57,7 @@
                console.log('실패');
             })
          })
-
-         // $('.btn').click(function (e) {
+         // $('.del').click(function (e) {
          //    $.ajax({
          //       method: 'DELETE',
          //       url: '/delete',

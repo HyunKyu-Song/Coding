@@ -13,21 +13,24 @@
 <body>
    <%- include('./nav.html') %>
 
-      <form action="/add" method="post" class="container mt-4 w-50">
-         <h2 class="my-4" style="font-weight: bolder;">Just Do It!</h2>
+      <form action="/edit?_method=PUT" method="POST" class="container mt-4 w-50">
+         <input value="<%= posts._id %>" name="id" style="display : none">
+         <h2 class="my-4" style="font-weight: bolder;">Edit Page</h2>
          <div class="mb-3">
             <label for="Work" class="form-label">Work</label>
-            <input type="text" class="form-control" id="Work" name="Work" placeholder="할 일">
+            <input type="text" class="form-control" value="<%= posts.work %>" id="Work" name="Work">
          </div>
          <div class="mb-3">
             <label for="Content" class="form-label">Content</label>
-            <input type="text" class="form-control" id="Content" name="Content" placeholder="내용"></input>
+            <input type="text" class="form-control" value="<%= posts.content %>" id="Content" name="Content"></input>
          </div>
          <div class="mb-3">
             <label for="date" class="form-label">Date</label>
-            <input type="text" class="form-control" id="date" name="date" placeholder="날짜"></input>
+            <input type="text" class="form-control" value="<%= posts.date %>" id="date" name="date"></input>
          </div>
-         <button type="submit" class="btn btn-outline-dark">Save</button>
+         <div class="text-center">
+            <button type="submit" class="update btn btn-warning">Update</button>
+         </div>
       </form>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -37,7 +40,16 @@
          integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
          </script>
       <script>
-         
+         // $('.update').click(function () {
+         //    $.ajax({
+         //       method: 'PUT',
+         //       url: `/edit/update/${e.target.dataset.num}`
+         //    }).done(function (result) {
+         //       console.log('변경');
+         //    }).fail(function (err) {
+         //       console.log('실패');
+         //    })
+         // })
       </script>
 </body>
 
