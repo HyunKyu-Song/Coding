@@ -9,9 +9,9 @@ app.use(methodOverride('_method'));
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-app.use(session({secret : '비밀코드', resave : true, saveUninitialized: false}));
+app.use(session({ secret: '비밀코드', resave: true, saveUninitialized: false }));
 app.use(passport.initialize());
-app.use(passport.session()); 
+app.use(passport.session());
 
 var db;
 MongoClient.connect('mongodb+srv://song0726:song033634120@cluster0.jkh1uqu.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (err, client) {
@@ -93,7 +93,12 @@ app.put('/edit', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
-   res.render('login.ejs');
+   if(req.user){
+      res.render('mypage.ejs', {user : req.user});
+   }
+   else{
+      res.render('login.ejs');
+   }
 })
 
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
@@ -114,19 +119,52 @@ passport.use(new LocalStrategy({
 
       if (!result) return done(null, false, { message: '존재하지않는 아이디요' })	//여기에 걸리면 아이디가 없는 것 (즉, result가 비었음)
       if (입력한비번 == result.user_pw) {
-         console.log('비번도 맞음')
-         return done(null, result)	//아이디, 비번 검증 성공시 result값을 세션 만들기 user에 보냄
+         //console.log('비번도 맞음')
+         return done(null, result)	//아이디, 비번 검증 성공시 result값을 passport.serializeUser(function (user, done)의 user에 보낸다.
       } else {
-         console.log('비번 틀림')
+         //console.log('비번 틀림')
          return done(null, false, { message: '비번틀렸어요' })
       }
    })
 }));
 
+//세션을 저장시키는 코드 (로그인 성공시 발동)
 passport.serializeUser(function (user, done) {	//아이디, 비번 검증 성공시
-   done(null, user)
+   done(null, user.user_id);
 });
 
+
+//이 세션 데이터를 가진 사람을 DB에서 찾아주세요 (마이페이지 접속시 발동)
+//deserializeUser( )는 로그인한 유저의 세션아이디를 바탕으로 개인정보를 DB에서 찾는 역할
 passport.deserializeUser(function (아이디, done) {
-   done(null, {})
+   db.collection('login').findOne({user_id : 아이디}, function(err, result){
+      done(null, result);  //마이페이지 접속시 DB에서 {user_id : 어쩌구}인걸 찾아서 그 결과를 보내줌. 어디로? 바로 app.get('/mypage', loginCheck, function(req, res) 여기로 그래서 req.user에 DB에서 찾은 데이터 들어있음.
+   })
 });
+
+app.get('/mypage', loginCheck, function(req, res){
+   res.render('mypage.ejs', {user : req.user});
+   // console.log(`req.user = ${req.user.user_id}`);
+})
+
+function loginCheck(req, res, next){
+   if(req.user){ //로그인 후 세션이 있으면 req.user는 항상있음
+      next() //그냥 다음으로 통과하라는 뜻
+   }
+   else{
+      res.redirect('/login');
+      // res.send('로그인 안 했음');
+   }
+}
+
+app.get('/logout', function(req, res){
+   req.logout(function(err, result){
+      if(err){
+         console.log(err);
+      }
+      else{
+         res.write("<script>alert('Logout Complete!')</script>");
+         res.write("<script>window.location=\"/\"</script>");
+      }
+   });
+})
