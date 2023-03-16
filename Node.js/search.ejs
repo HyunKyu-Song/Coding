@@ -32,9 +32,6 @@
                         </p>
                      </a>
                   </div>
-                  <!-- <a href="/edit/<%= posts[i]._id %>" style="text-decoration: none;">
-                     <button class="btn btn-outline-warning">Update</button>
-                  </a> -->
                   <button class="del btn btn-outline-danger" data-num="<%= posts[i]._id %>">Delete</button>
                </li>
                <% } %>
@@ -51,7 +48,10 @@
          $('.search').click(function(e){
             console.log($('.search-content').val());
             var keyword = $('.search-content').val();
-            window.location.replace(`/search?value=${keyword}`);
+            var 자료 = {name:'채원', name2: '카즈하'};
+            $.param(자료);
+            console.log($.param(자료))
+            // window.location.replace(`/search?value=${keyword}`);
          })
 
          $('.del').click(function (e) {
@@ -67,20 +67,6 @@
                console.log('실패');
             })
          })
-         // $('.del').click(function (e) {
-         //    $.ajax({
-         //       method: 'DELETE',
-         //       url: '/delete',
-         //       data: { _id: e.target.dataset.num }
-         //    }).done(function (result) {
-         //       $(e.target).parent('li').fadeOut();
-         //       console.log('delete success');
-         //       // location.reload();
-         //       console.log(result);
-         //    }).fail(function (err) {
-         //       console.log('실패');
-         //    })
-         // })
       </script>
 </body>
 

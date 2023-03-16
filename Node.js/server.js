@@ -12,13 +12,14 @@ const session = require('express-session');
 app.use(session({ secret: '비밀코드', resave: true, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+require('dotenv').config();
 
 var db;
-MongoClient.connect('mongodb+srv://song0726:song033634120@cluster0.jkh1uqu.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (err, client) {
+MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (err, client) {
    if (err) return console.log(err);
    db = client.db('todolist');
 
-   app.listen(8080, function () {
+   app.listen(process.env.PORT, function () {
       console.log('listening 8080');
    });
 })
@@ -93,10 +94,10 @@ app.put('/edit', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
-   if(req.user){
-      res.render('mypage.ejs', {user : req.user});
+   if (req.user) {
+      res.render('mypage.ejs', { user: req.user });
    }
-   else{
+   else {
       res.render('login.ejs');
    }
 })
@@ -137,34 +138,43 @@ passport.serializeUser(function (user, done) {	//아이디, 비번 검증 성공
 //이 세션 데이터를 가진 사람을 DB에서 찾아주세요 (마이페이지 접속시 발동)
 //deserializeUser( )는 로그인한 유저의 세션아이디를 바탕으로 개인정보를 DB에서 찾는 역할
 passport.deserializeUser(function (아이디, done) {
-   db.collection('login').findOne({user_id : 아이디}, function(err, result){
+   db.collection('login').findOne({ user_id: 아이디 }, function (err, result) {
       done(null, result);  //마이페이지 접속시 DB에서 {user_id : 어쩌구}인걸 찾아서 그 결과를 보내줌. 어디로? 바로 app.get('/mypage', loginCheck, function(req, res) 여기로 그래서 req.user에 DB에서 찾은 데이터 들어있음.
    })
 });
 
-app.get('/mypage', loginCheck, function(req, res){
-   res.render('mypage.ejs', {user : req.user});
+app.get('/mypage', loginCheck, function (req, res) {
+   res.render('mypage.ejs', { user: req.user });
    // console.log(`req.user = ${req.user.user_id}`);
 })
 
-function loginCheck(req, res, next){
-   if(req.user){ //로그인 후 세션이 있으면 req.user는 항상있음
+function loginCheck(req, res, next) {
+   if (req.user) { //로그인 후 세션이 있으면 req.user는 항상있음
       next() //그냥 다음으로 통과하라는 뜻
    }
-   else{
+   else {
       res.redirect('/login');
       // res.send('로그인 안 했음');
    }
 }
 
-app.get('/logout', function(req, res){
-   req.logout(function(err, result){
-      if(err){
+app.get('/logout', function (req, res) {
+   req.logout(function (err, result) {
+      if (err) {
          console.log(err);
       }
-      else{
+      else {
          res.write("<script>alert('Logout Complete!')</script>");
          res.write("<script>window.location=\"/\"</script>");
       }
    });
+})
+
+app.get('/search', function (req, res) {
+   // db.collection('post').find({work : req.query.value}).toArray(function(err, result){
+   db.collection('post').find({ work: /식사/ }).toArray(function (err, result) {
+      res.render('search.ejs', { posts: result });
+      console.log(req.query.value);
+      console.log(result);
+   })
 })
