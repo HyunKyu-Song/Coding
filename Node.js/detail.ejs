@@ -21,11 +21,14 @@
                   No. <%= posts._id %>
                </h5>
                <h5 class="card-title">
-                  ToDo: <%= posts.work %>
+                  제목: <%= posts.work %>
                </h5>
-               <p class="card-text">Content: <%= posts.content %></p>
-               <h6 class="card-subtitle mb-2 text-muted">
-                  Date: <%= posts.date %>
+               <p class="card-text">내용: <%= posts.content %></p>
+               <h6 class="card-subtitle my-3 text-muted">
+                  날짜: <%= posts.date %>
+               </h6>
+               <h6 class="card-subtitle my-3 text-muted">
+                  작성자: <%= posts.writer %>
                </h6>
                <a href="/edit/<%= posts._id %>" style="text-decoration: none;">
                   <button class="btn btn-outline-warning">Update</button>

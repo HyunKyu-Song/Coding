@@ -35,26 +35,42 @@ app.get('/list', function (req, res) {
    })
 })
 
-app.get('/write', function (req, res) {
+app.get('/write', loginCheck, function (req, res) {
    res.render('write.ejs');
 })
 
-app.post('/add', function (req, res) {
+app.post('/write', function (req, res) {
+
    db.collection('cnt').findOne({ name: '게시물 갯수' }, function (err, result) {
-      db.collection('post').insertOne({ _id: result.total, work: req.body.Work, content: req.body.Content, date: req.body.date }, function (err, result) {
+
+      db.collection('post').insertOne({ _id: result.total, writer: req.user.user_id, work: req.body.Work, content: req.body.Content, date: req.body.date }, function (err, result) {
+
          db.collection('cnt').updateOne({ name: '게시물 갯수' }, { $inc: { total: 1 } }, function (err, result) {
+
             if (err) return console.log(err);
             res.redirect('/write');
          });
+
       });
+
    });
+
 })
 
-app.delete('/delete/:id', function (req, res) {
-   db.collection('post').deleteOne({ _id: parseInt(req.params.id) }, function (err, result) {
-      console.log('삭제완료');
-      res.status(200).send({ message: '성공했습니다' });
-      // res.status(400).send({message : '실패했습니다'});
+app.delete('/delete/:id', loginCheck, function (req, res) {
+
+   db.collection('post').findOne({ _id: parseInt(req.params.id) }, function (err, result) {
+
+      if (req.user.user_id === result.writer) {
+         db.collection('post').deleteOne({ _id: parseInt(req.params.id) }, function (err, result) {
+            console.log('삭제완료');
+            res.status(200).send({ message: '성공했습니다' });
+            // res.status(400).send({message : '실패했습니다'});
+         })
+      }
+      else{
+         res.write("<script>alert('Only authors can delete')</script>");
+      }
    })
 })
 // app.delete('/delete', function(req, res){
@@ -68,14 +84,14 @@ app.delete('/delete/:id', function (req, res) {
 // })
 
 
-app.get('/detail/:id', function (req, res) {
+app.get('/detail/:id', loginCheck, function (req, res) {
    db.collection('post').findOne({ _id: parseInt(req.params.id) }, function (err, result) {
       res.render('detail.ejs', { posts: result });
       // console.log(result);
    })
 })
 
-app.get('/edit/:id', function (req, res) {
+app.get('/edit/:id', loginCheck, function (req, res) {
    db.collection('post').findOne({ _id: parseInt(req.params.id) }, function (err, result) {
       res.render('edit.ejs', { posts: result });
    })
@@ -87,7 +103,7 @@ app.get('/edit/:id', function (req, res) {
 //    })
 // })
 
-app.put('/edit', function (req, res) {
+app.put('/edit', loginCheck, function (req, res) {
    db.collection('post').updateOne({ _id: parseInt(req.body.id) }, { $set: { work: req.body.Work, content: req.body.Content, date: req.body.date } }, function (err, result) {
       res.redirect('/list');
    })
@@ -171,10 +187,38 @@ app.get('/logout', function (req, res) {
 })
 
 app.get('/search', function (req, res) {
-   // db.collection('post').find({work : req.query.value}).toArray(function(err, result){
-   db.collection('post').find({ work: /식사/ }).toArray(function (err, result) {
+
+   var 검색조건 = [
+      {
+         $search: {
+            index: 'titleSearch',
+            text: {
+               query: req.query.value,
+               path: ['work', 'date']
+            }
+         }
+      }
+   ]
+
+   // db.collection('post').find({ work: /식사/ }).toArray(function (err, result) {
+   // db.collection('post').find({ $text : { $search: req.query.value} }).toArray(function (err, result) {
+   // db.collection('post').find({ work: req.query.value }).toArray(function (err, result) {
+   db.collection('post').aggregate(검색조건).toArray(function (err, result) {
       res.render('search.ejs', { posts: result });
       console.log(req.query.value);
       console.log(result);
+   })
+})
+
+
+app.get('/sign-up', function (req, res) {
+   res.render('sign-up.ejs');
+})
+
+
+app.post('/sign-up', function (req, res) {// 아이디 중복 검사 추가해야 함
+   db.collection('login').insertOne({ user_id: req.body.userid, user_pw: req.body.userpw }, function (err, result) {
+      res.write("<script>alert('Welcome ToDo List!')</script>");
+      res.write("<script>window.location=\"/\"</script>");
    })
 })

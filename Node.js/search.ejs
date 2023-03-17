@@ -48,10 +48,7 @@
          $('.search').click(function(e){
             console.log($('.search-content').val());
             var keyword = $('.search-content').val();
-            var 자료 = {name:'채원', name2: '카즈하'};
-            $.param(자료);
-            console.log($.param(자료))
-            // window.location.replace(`/search?value=${keyword}`);
+            window.location.replace(`/search?value=${keyword}`);
          })
 
          $('.del').click(function (e) {
