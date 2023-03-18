@@ -13,6 +13,10 @@ app.use(session({ secret: '비밀코드', resave: true, saveUninitialized: false
 app.use(passport.initialize());
 app.use(passport.session());
 require('dotenv').config();
+app.use('/shop', require('./routes/shop.js'));
+
+
+
 
 var db;
 MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (err, client) {
@@ -68,7 +72,7 @@ app.delete('/delete/:id', loginCheck, function (req, res) {
             // res.status(400).send({message : '실패했습니다'});
          })
       }
-      else{
+      else {
          res.write("<script>alert('Only authors can delete')</script>");
       }
    })
@@ -221,4 +225,51 @@ app.post('/sign-up', function (req, res) {// 아이디 중복 검사 추가해�
       res.write("<script>alert('Welcome ToDo List!')</script>");
       res.write("<script>window.location=\"/\"</script>");
    })
+})
+
+
+
+
+let multer = require('multer');
+var storage = multer.diskStorage({
+
+   destination: function (req, file, cb) {
+      cb(null, './public/img')
+   },
+   filename: function (req, file, cb) {
+      cb(null, file.originalname)
+   }
+
+});
+
+// var upload = multer({storage : storage});
+
+
+var path = require('path');
+
+var upload = multer({
+   storage: storage,
+   fileFilter: function (req, file, callback) {
+      var ext = path.extname(file.originalname);
+      if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+         return callback(new Error('PNG, JPG만 업로드하세요'))
+      }
+      callback(null, true)
+   },
+   limits: {
+      fileSize: 1024 * 1024
+   }
+});
+
+
+app.get('/upload', function (req, res) {
+   res.render('upload.ejs');
+})
+
+app.post('/upload', upload.single('profile'), function (req, res) {
+   res.send('upload complete!');
+})
+
+app.get('/img/:imageName', function (req, res) {
+   res.sendFile(__dirname + '/public/img/' + req.params.imageName)
 })
