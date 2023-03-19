@@ -273,3 +273,25 @@ app.post('/upload', upload.single('profile'), function (req, res) {
 app.get('/img/:imageName', function (req, res) {
    res.sendFile(__dirname + '/public/img/' + req.params.imageName)
 })
+
+
+app.get('/chat/:id', loginCheck, function (req, res) {
+   req.params.id = parseInt(req.params.id);
+   db.collection('chatroom').find({ member: req.user.user_id }).toArray(function (err, result) {
+      res.render('chat.ejs', { chat: result });
+   })
+})
+
+
+app.post('/chat/:id', loginCheck, function (req, res) {
+   req.params.id = parseInt(req.params.id);
+   // console.log(req.params.id);
+   db.collection('post').findOne({ _id: req.params.id }, function (err, result) {
+
+      db.collection('chatroom').insertOne({member : [req.user.user_id, result.writer], date : new Date(), title : `chat_${req.params.id}`}, function(err, result){
+         res.status(200).send({ message: '성공했습니다' });
+      })
+
+   })
+})
+

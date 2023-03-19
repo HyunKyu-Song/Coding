@@ -34,12 +34,18 @@
                         <p class="date">
                            <%= posts[i].date %>
                         </p>
+                        <p>
+                           작성자: <%= posts[i].writer %>
+                        </p>
                      </a>
                   </div>
                   <!-- <a href="/edit/<%= posts[i]._id %>" style="text-decoration: none;">
                      <button class="btn btn-outline-warning">Update</button>
                   </a> -->
                   <button class="del btn btn-outline-danger" data-num="<%= posts[i]._id %>">Delete</button>
+                  <a href="/chat/<%= posts[i]._id %>">
+                     <button class="chat btn btn-outline-info" data-num="<%= posts[i]._id %>">채팅방</button>
+                  </a>
                </li>
                <% } %>
          </ol>
@@ -52,6 +58,18 @@
          integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
          </script>
       <script>
+         $('.chat').click(function(e){
+            $.ajax({
+               method: 'POST',
+               url: `/chat/${e.target.dataset.num}`
+            }).done(function(result){
+               console.log(result);
+            }).fail(function(err){
+               console.log('실패');
+            })
+         })
+
+
          $('.search').click(function (e) {
             console.log($('.search-content').val());
             var keyword = $('.search-content').val();

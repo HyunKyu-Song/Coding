@@ -30,6 +30,9 @@
                         <p class="date">
                            <%= posts[i].date %>
                         </p>
+                        <p>
+                           작성자: <%= posts[i].writer %>
+                        </p>
                      </a>
                   </div>
                   <button class="del btn btn-outline-danger" data-num="<%= posts[i]._id %>">Delete</button>
