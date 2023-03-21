@@ -135,7 +135,7 @@ passport.use(new LocalStrategy({
 }, function (입력한아이디, 입력한비번, done) {
    console.log(입력한아이디, 입력한비번);
    db.collection('login').findOne({ user_id: 입력한아이디 }, function (err, result) {
-      console.log(result);
+      // console.log(result);
       if (err) return done(err)	//err 났는지 검사
 
       if (!result) return done(null, false, { message: '존재하지않는 아이디요' })	//여기에 걸리면 아이디가 없는 것 (즉, result가 비었음)
@@ -278,7 +278,9 @@ app.get('/img/:imageName', function (req, res) {
 app.get('/chat/:id', loginCheck, function (req, res) {
    req.params.id = parseInt(req.params.id);
    db.collection('chatroom').find({ member: req.user.user_id }).toArray(function (err, result) {
-      res.render('chat.ejs', { chat: result });
+      db.collection('message').find({ 보낸사람 : req.user.user_id}).toArray(function(error, result2){
+         res.render('chat.ejs', { chat: result, chatmessage: result2 });
+      })
    })
 })
 
@@ -292,6 +294,19 @@ app.post('/chat/:id', loginCheck, function (req, res) {
          res.status(200).send({ message: '성공했습니다' });
       })
 
+   })
+})
+
+
+app.post('/message', function(req, res){
+   var 보낼것 = {
+      보낸사람 : req.user.user_id, 
+      받는사람 : req.body.parent, 
+      내용 : req.body.content, 
+      date : new Date()
+   }
+   db.collection('message').insertOne(보낼것, function(err, result){
+      res.send('message success!');
    })
 })
 
