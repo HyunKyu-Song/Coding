@@ -6,3 +6,12 @@
   background-position : center;
   /* background-repeat: no-repeat; */
 }
+
+.hide{
+  scale: 0;
+}
+
+.show{
+  scale: 1;
+  transition: all 0.8s;
+}
