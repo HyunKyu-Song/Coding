@@ -8,6 +8,7 @@ import {Nav, Container, Navbar, Alert} from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Detail from './component/Detail.js';
+import Cart from './component/Cart.js';
 import Lesserafim_member from './component/Lesserafim_member.js';
 import NewJeans_member from './component/NewJeans_member.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
@@ -44,6 +45,7 @@ function App() {
             <Nav.Link onClick={() => { navigate('/TWICE') }}>TWICE</Nav.Link>
             <Nav.Link onClick={() => { navigate('/LESSERAFIM') }}>LE SSERAFIM</Nav.Link>
             <Nav.Link onClick={() => { navigate('/NewJeans') }}>NewJeans</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/cart') }}>Cart</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -107,6 +109,8 @@ function App() {
         } />
 
         <Route path='/:group/detail/:groupid/:id' element={<Detail groupName={[lesserafim, newjeans]} />} />
+
+        <Route path='/cart' element={<Cart/>} />
 
         <Route path="*" element={<div className='container'><h2 className='mt-5'>404 Error</h2></div>} />
 
