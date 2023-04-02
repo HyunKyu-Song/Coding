@@ -25,9 +25,9 @@ function Detail(props) {
    // console.log(`from = ${c}`)
    // console.log(`MBTI = ${d}`)
 
-   // console.log(`group = ${group}`)
-   // console.log(`id = ${id}`)
-   // console.log(`groupid = ${groupid}`)
+   console.log(`group = ${group}`)
+   console.log(`id = ${id}`)
+   console.log(`groupid = ${groupid}`)
    // console.log(`tab = ${tab}`);
 
    useEffect(()=>{
@@ -47,7 +47,7 @@ function Detail(props) {
             <div className="row m-5">
                <div className="col-md-6">
                   <img src={`https://hyunkyu-song.github.io/GoodsShop/${group}/${props.groupName[groupid][id].name}.jpg`} width="70%" />
-                  {/* <img src={`https://hyunkyu-song.github.io/GoodsShop/LESSERAFIM/${props.lesserafim[id].name}.jpg`} width="70%" /> */}
+                  {/* <img src={`https://hyunkyu-song.github.io/GoodsShop/Twice/${props.lesserafim[id].name}.jpg`} width="70%" /> */}
                </div>
                <div className="col-md-6">
                   <h4 className="pt-5">{props.groupName[groupid][id].name} Photo Card</h4>
@@ -59,8 +59,9 @@ function Detail(props) {
                      dispatch(addGoods(
                         {
                            id: props.groupName[groupid][id].id,
+                           group_id: groupid,
                            name: props.groupName[groupid][id].name + ' Photo Card',
-                           count: 0
+                           count: 1
                         }
                      ));
                   }} className="btn btn-danger">장바구니 추가</button>

@@ -1,10 +1,24 @@
 .main-bg {
   height : 1000px;
-  background-image : url('../public/bg.jpg');
-  filter: opacity(0.9);
-  background-size : cover;
+  background-image : url('../public/배경.jpg');
+  filter: brightness(90%);
+  background-size : contain;
   background-position : center;
-  /* background-repeat: no-repeat; */
+}
+
+.ment{
+  color: coral;
+  font-size: 80px;
+  font-weight: 900;
+  filter: brightness(100%);
+  /* filter: ; */
+}
+
+.moveMent{
+  color: cornflowerblue;
+  font-size: 50px;
+  font-weight: 900;
+  filter: brightness(100%);
 }
 
 .hide{
