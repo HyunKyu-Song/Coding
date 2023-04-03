@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>날씨</title>
+</head>
+<body>
+   <hr>
+   <h2>날씨 API 써보자!</h2>
+   <hr>
+   <div>
+      <h4>알고 싶은 도시 입력</h4>
+      <input class="inp" type="text"> <button class="btn">버튼</button>
+      <div class="city" style="margin-top: 30px;"></div>
+      <div class="temperature"></div>
+      <div class="wind"></div>
+   </div>
+</body>
+</html>
+
+<script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
+</script>
+
+<script>
+   $('.btn').click(function(){
+      //console.log($('.inp').val());
+      var city = $('.inp').val();
+
+      $.get(`https://goweather.herokuapp.com/weather/${city}`)
+      .done(function(data){
+         console.log(data);
+         $('.city').html(city);
+         $('.city').css('text-transform', 'capitalize');
+         $('.temperature').html(`온도: ${data.temperature}`);
+         $('.wind').html(`풍속: ${data.wind}`);
+      })
+      .fail(function(){
+         console.log('fail');
+      })
+   })
+</script>
