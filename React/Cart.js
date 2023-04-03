@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeName, plusCnt, minusCnt } from '../store.js';

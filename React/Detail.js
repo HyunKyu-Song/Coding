@@ -24,10 +24,14 @@ function Detail(props) {
    // console.log(`birth = ${b}`)
    // console.log(`from = ${c}`)
    // console.log(`MBTI = ${d}`)
+   let [data, setData] = useState([`${group}`, groupid, id]);
+   console.log(data)
+   
 
    console.log(`group = ${group}`)
    console.log(`id = ${id}`)
    console.log(`groupid = ${groupid}`)
+
    // console.log(`tab = ${tab}`);
 
    useEffect(()=>{
@@ -35,6 +39,14 @@ function Detail(props) {
          setAlert(false);
       }, 3000)
    }, [alert])
+
+
+// 새로고침 시 흰 화면 띄는 이유는 데이터가 초기화 되기 때문이다.
+
+// 해결법
+// 1. 이 컴포넌트에 데이터 직접 입력
+// 2. db에서 데이터 ajax로 가져오기
+
 
    return (
       <>

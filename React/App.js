@@ -26,7 +26,7 @@ function App() {
   let navigate = useNavigate();
   let result = useQuery(['작명'], () => {
     return axios.get('https://codingapple1.github.io/userdata.json').then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
       // res.data 성공
       // res.isLoading  로딩중
