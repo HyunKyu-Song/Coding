@@ -1,45 +1,100 @@
 <template>
   <div id="app">
+    <div class="black-bg" v-if="modal == true" @click="modal = false">
+      <div class="white-bg">
+        <DiscountAd/>
+        <h2>{{ oneroom[num].title }}</h2>
+        <h4>{{ oneroom[num].content }}</h4>
+        <p>월세: {{ oneroom[num].price }}원</p>
+        <img
+          :src="oneroom[num].image"
+          alt="room"
+          style="cursor: pointer; margin-top: 40px"
+        />
+      </div>
+    </div>
 
     <nav class="nav">
       <li v-for="(item, i) in menu" :key="i">{{ item }}</li>
     </nav>
 
-    <div v-for="(item, i) in products" :key="item">
-      <h3 :style="styleColor">{{ item }}</h3>
-      <p>월세: {{ price[i] }}만원</p>
-      <button @click="increase(i)">허위매물신고량</button> <span>{{신고횟수[i]}}회</span>
-      <hr>
-    </div>
+    <DiscountAd/>
 
+    <div v-for="(item, i) in oneroom" :key="item">
+      <img
+        @click="
+          modal = true;
+          num = i;
+        "
+        :src="item.image"
+        alt="room"
+        style="cursor: pointer; margin-top: 40px"
+      />
+      <!-- <h3 :style="styleColor">{{ item.title }}</h3> -->
+      <h4>{{ item.content }}</h4>
+      <!-- <p>월세: {{ item.price }}원</p> -->
+      <hr />
+    </div>
   </div>
 </template>
 
 <script>
+import oneroomData from "./assets/oneroom.js";
+import DiscountAd from "./DiscountAd.vue";
+
 export default {
   name: "App",
   data() {
     return {
-      price: [10, 30, 50],
+      oneroom: oneroomData,
       styleColor: "color : coral",
-      products: ["ㄱ원룸", "ㄴ원룸", "ㄷ원룸"],
       menu: ["home", "contact", "about"],
-      신고횟수 : [10, 20, 30],
-      신고 : 0
+      modal: false,
+      num: 0,
     };
   },
-  methods : {
-    increase(i){
-      this.신고횟수[i] += 1; //함수안에서 데이터 쓸 땐 this.데이터명
-      this.$forceUpdate(); //강제로 화면을 갱신
-      //this.$set(this.신고횟수, i, this.신고횟수[i] += 10);
-    }
+  methods: {},
+  components: {
+    DiscountAd : DiscountAd //왼쪽에 DiscountAd는 자유작명
   },
-  components: {},
 };
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+img {
+  width: 40%;
+}
+
+.discount{
+  background-color: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
 .nav {
   display: flex;
   justify-content: center;
