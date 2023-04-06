@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div class="black-bg" v-if="modal == true" @click="modal = false">
+    <!-- <div class="black-bg" v-if="modal == true" @click="modal = false">
       <div class="white-bg">
-        <DiscountAd/>
+        <DiscountAd />
         <h2>{{ oneroom[num].title }}</h2>
         <h4>{{ oneroom[num].content }}</h4>
         <p>월세: {{ oneroom[num].price }}원</p>
@@ -12,15 +12,17 @@
           style="cursor: pointer; margin-top: 40px"
         />
       </div>
-    </div>
+    </div> -->
+    <ModalBox @closeModal="modal = false" v-if="modal === true" :oneroom="oneroom" :num="num" />
 
     <nav class="nav">
       <li v-for="(item, i) in menu" :key="i">{{ item }}</li>
     </nav>
 
-    <DiscountAd/>
+    <DiscountAd />
+    <CardBox @openModal="modal = true; num = $event" v-for="(item) in oneroom" :key="item" :item="item"/>
 
-    <div v-for="(item, i) in oneroom" :key="item">
+    <!-- <div v-for="(item, i) in oneroom" :key="item">
       <img
         @click="
           modal = true;
@@ -30,17 +32,17 @@
         alt="room"
         style="cursor: pointer; margin-top: 40px"
       />
-      <!-- <h3 :style="styleColor">{{ item.title }}</h3> -->
       <h4>{{ item.content }}</h4>
-      <!-- <p>월세: {{ item.price }}원</p> -->
       <hr />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import oneroomData from "./assets/oneroom.js";
-import DiscountAd from "./DiscountAd.vue";
+import DiscountAd from "./components/DiscountAd.vue";
+import ModalBox from "./components/ModalBox.vue";
+import CardBox from "./components/CardBox.vue";
 
 export default {
   name: "App",
@@ -55,7 +57,9 @@ export default {
   },
   methods: {},
   components: {
-    DiscountAd : DiscountAd //왼쪽에 DiscountAd는 자유작명
+    DiscountAd: DiscountAd, //왼쪽에 DiscountAd는 자유작명
+    ModalBox: ModalBox,
+    CardBox: CardBox,
   },
 };
 </script>
@@ -73,7 +77,7 @@ img {
   width: 40%;
 }
 
-.discount{
+.discount {
   background-color: #eee;
   padding: 10px;
   margin: 10px;
