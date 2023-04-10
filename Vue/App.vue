@@ -13,14 +13,39 @@
         />
       </div>
     </div> -->
-    <ModalBox @closeModal="modal = false" v-if="modal === true" :oneroom="oneroom" :num="num" />
+
+    <transition name="fade">
+      <ModalBox
+        @closeModal="modal = false"
+        v-if="modal === true"
+        :oneroom="oneroom"
+        :num="num"
+      />
+    </transition>
+
+    <!-- <div class="hide" :class="{ show: modal }">
+      <ModalBox
+        @closeModal="modal = false"
+        v-if="modal === true"
+        :oneroom="oneroom"
+        :num="num"
+      />
+    </div> -->
 
     <nav class="nav">
       <li v-for="(item, i) in menu" :key="i">{{ item }}</li>
     </nav>
 
     <DiscountAd />
-    <CardBox @openModal="modal = true; num = $event" v-for="(item) in oneroom" :key="item" :item="item"/>
+    <CardBox
+      @openModal="
+        modal = true;
+        num = $event;
+      "
+      v-for="item in oneroom"
+      :key="item"
+      :item="item"
+    />
 
     <!-- <div v-for="(item, i) in oneroom" :key="item">
       <img
@@ -84,21 +109,6 @@ img {
   border-radius: 10px;
 }
 
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-}
-
 .nav {
   display: flex;
   justify-content: center;
@@ -111,6 +121,27 @@ img {
   color: white;
   list-style: none;
   padding: 20px;
+}
+
+/* .hide {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.show {
+  opacity: 1;
+} */
+
+.fade-enter-from{
+    opacity: 0;
+}
+
+.fade-enter-active{
+    transition: all 1s;
+}
+
+.fade-enter-to{
+    opacity: 1;
 }
 
 #app {
