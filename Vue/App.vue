@@ -36,7 +36,11 @@
       <li v-for="(item, i) in menu" :key="i">{{ item }}</li>
     </nav>
 
-    <DiscountAd />
+    <DiscountAd v-if="discount == true" :disPer="disPer" />
+
+    <button @click="goodsSort">상품정렬</button>
+    <button @click="originSort">정렬 초기화</button>
+
     <CardBox
       @openModal="
         modal = true;
@@ -73,14 +77,39 @@ export default {
   name: "App",
   data() {
     return {
+      originOneroom: [...oneroomData],
       oneroom: oneroomData,
       styleColor: "color : coral",
       menu: ["home", "contact", "about"],
       modal: false,
       num: 0,
+      discount: true,
+      disPer: 20,
     };
   },
-  methods: {},
+  methods: {
+    goodsSort() {
+      this.oneroom.sort(function (a, b) {
+        return a.price - b.price;
+      });
+    },
+    originSort() {
+      this.oneroom = [...this.originOneroom];
+    },
+  },
+  // mounted() {
+  //   setInterval(() => {
+  //     if (this.disPer > 0) {
+  //       this.disPer -= 1;
+  //     }
+  //   }, 1000);
+  // },
+  // mounted(){
+  //   setTimeout(() => {
+  //     this.discount = false;
+  //   }, 3000);
+  // },
+
   components: {
     DiscountAd: DiscountAd, //왼쪽에 DiscountAd는 자유작명
     ModalBox: ModalBox,
@@ -132,16 +161,18 @@ img {
   opacity: 1;
 } */
 
-.fade-enter-from{
-    opacity: 0;
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-1000px);
 }
 
-.fade-enter-active{
-    transition: all 1s;
+.fade-enter-active {
+  transition: all 1s;
 }
 
-.fade-enter-to{
-    opacity: 1;
+.fade-enter-to {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 #app {

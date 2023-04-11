@@ -25,6 +25,12 @@ export default {
       month : 0,
     }
   },
+  beforeUpdate(){
+    if(this.month == 2){
+      this.month = 0;
+      alert('2개월은 안됨');
+    }
+  },
   watch:{
     month(data){
       //month라는 데이터가 변하면 여기있는 코드 실행됨

@@ -7,6 +7,7 @@
       style="cursor: pointer; margin-top: 40px"
     />
     <h4>{{ item.content }}</h4>
+    <h4>{{ item.price }}</h4>
     <hr />
   </div>
 </template>
