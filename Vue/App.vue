@@ -1,186 +1,83 @@
 <template>
-  <div id="app">
-    <!-- <div class="black-bg" v-if="modal == true" @click="modal = false">
-      <div class="white-bg">
-        <DiscountAd />
-        <h2>{{ oneroom[num].title }}</h2>
-        <h4>{{ oneroom[num].content }}</h4>
-        <p>월세: {{ oneroom[num].price }}원</p>
-        <img
-          :src="oneroom[num].image"
-          alt="room"
-          style="cursor: pointer; margin-top: 40px"
-        />
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <router-link to="/">
+        <a class="navbar-brand">Home</a>
+      </router-link>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link to="/list">
+              <a class="nav-link">list</a>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+        </ul>
       </div>
-    </div> -->
-
-    <transition name="fade">
-      <ModalBox
-        @closeModal="modal = false"
-        v-if="modal === true"
-        :oneroom="oneroom"
-        :num="num"
-      />
-    </transition>
-
-    <!-- <div class="hide" :class="{ show: modal }">
-      <ModalBox
-        @closeModal="modal = false"
-        v-if="modal === true"
-        :oneroom="oneroom"
-        :num="num"
-      />
-    </div> -->
-
-    <nav class="nav">
-      <li v-for="(item, i) in menu" :key="i">{{ item }}</li>
-    </nav>
-
-    <DiscountAd v-if="discount == true" :disPer="disPer" />
-
-    <button @click="goodsSort">상품정렬</button>
-    <button @click="originSort">정렬 초기화</button>
-
-    <CardBox
-      @openModal="
-        modal = true;
-        num = $event;
-      "
-      v-for="item in oneroom"
-      :key="item"
-      :item="item"
-    />
-
-    <!-- <div v-for="(item, i) in oneroom" :key="item">
-      <img
-        @click="
-          modal = true;
-          num = i;
-        "
-        :src="item.image"
-        alt="room"
-        style="cursor: pointer; margin-top: 40px"
-      />
-      <h4>{{ item.content }}</h4>
-      <hr />
-    </div> -->
-  </div>
+    </div>
+  </nav>
+  <router-view :blogData="blogData"></router-view>
 </template>
 
-<script>
-import oneroomData from "./assets/oneroom.js";
-import DiscountAd from "./components/DiscountAd.vue";
-import ModalBox from "./components/ModalBox.vue";
-import CardBox from "./components/CardBox.vue";
 
+<script>
 export default {
   name: "App",
   data() {
     return {
-      originOneroom: [...oneroomData],
-      oneroom: oneroomData,
-      styleColor: "color : coral",
-      menu: ["home", "contact", "about"],
-      modal: false,
-      num: 0,
-      discount: true,
-      disPer: 20,
+      blogData: [
+        {
+          title: "첫 째 프로젝트 : 허위매물 전문 부동산 앱",
+          content: "Vue를 이용하면 비누같이 매끈한 앱을 만들 수 있습니다",
+          date: "September 24, 2021",
+          number: 0,
+        },
+        {
+          title: "둘 째 프로젝트 : 오마카세 배달 앱",
+          content: "음식이 아니라 셰프를 직접 배달해드립니다",
+          date: "October 20, 2020",
+          number: 1,
+        },
+        {
+          title: "셋 째 프로젝트 : 현피 앱",
+          content:
+            "거리를 설정하면 가장 가까운 파이터를 소개해드려요! 서로 싸워보세요",
+          date: "April 24, 2019",
+          number: 2,
+        },
+      ],
     };
   },
-  methods: {
-    goodsSort() {
-      this.oneroom.sort(function (a, b) {
-        return a.price - b.price;
-      });
-    },
-    originSort() {
-      this.oneroom = [...this.originOneroom];
-    },
-  },
-  // mounted() {
-  //   setInterval(() => {
-  //     if (this.disPer > 0) {
-  //       this.disPer -= 1;
-  //     }
-  //   }, 1000);
-  // },
-  // mounted(){
-  //   setTimeout(() => {
-  //     this.discount = false;
-  //   }, 3000);
-  // },
-
-  components: {
-    DiscountAd: DiscountAd, //왼쪽에 DiscountAd는 자유작명
-    ModalBox: ModalBox,
-    CardBox: CardBox,
-  },
+  components: {},
 };
 </script>
 
 <style>
-body {
-  margin: 0;
-}
-
-div {
-  box-sizing: border-box;
-}
-
-img {
-  width: 40%;
-}
-
-.discount {
-  background-color: #eee;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-}
-
-.nav {
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: darkslateblue;
-}
-
-.nav li {
-  color: white;
-  list-style: none;
-  padding: 20px;
-}
-
-/* .hide {
-  opacity: 0;
-  transition: all 1s;
-}
-
-.show {
-  opacity: 1;
-} */
-
-.fade-enter {
-  opacity: 0;
-  transform: translateX(-1000px);
-}
-
-.fade-enter-active {
-  transition: all 1s;
-}
-
-.fade-enter-to {
-  opacity: 1;
-  transform: translateX(0);
-}
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 60px; */
+}
+
+a{
+  text-decoration: none;
 }
 </style>
