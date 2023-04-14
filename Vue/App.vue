@@ -1,83 +1,146 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <router-link to="/">
-        <a class="navbar-brand">Home</a>
-      </router-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/list">
-              <a class="nav-link">list</a>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <router-view :blogData="blogData"></router-view>
+  <div class="header">
+    <ul class="header-button-left">
+      <li>Cancel</li>
+    </ul>
+    <ul class="header-button-right">
+      <li>Next</li>
+    </ul>
+    <img src="./assets/logo.png" class="logo" />
+  </div>
+
+  <Container :postData="postData" :tabNum="tabNum"/>
+  <div class="text-center mt-3">
+    <button @click="tabNum=0" class="btn btn-outline-primary" >메인</button>
+    <button @click="tabNum=1" class="btn btn-outline-primary mx-3">필터</button>
+    <button @click="tabNum=2" class="btn btn-outline-primary">글작성</button>
+  </div>
+  <div class="text-center mt-4">
+    <button @click="more" class="btn btn-outline-dark">more</button>
+  </div>
+
+  <div class="footer">
+    <ul class="footer-button-plus">
+      <input type="file" id="file" class="inputfile" />
+      <label for="file" class="input-plus">+</label>
+    </ul>
+  </div>
 </template>
-NETFLIX
 
 <script>
+import Container from "./components/Container.vue";
+import postData from "./assets/postData.js";
+import axios from "axios";
+
 export default {
   name: "App",
   data() {
     return {
-      blogData: [
-        {
-          title: "첫 째 프로젝트 : VueFLIX 앱",
-          content: "넷플릭스를 클론해서 만든 OTT 앱",
-          date: "March 31, 2021",
-          number: 0,
-        },
-        {
-          title: "둘 째 프로젝트 : 요리조리 앱",
-          content: "음식 레시피를 일려드립니다.",
-          date: "October 20, 2020",
-          number: 1,
-        },
-        {
-          title: "셋 째 프로젝트 : 뉴진스에 하입보이요 앱",
-          content:
-            "자신이 듣는 노래를 다른 사람에게 추천해주며, 좋은 노래를 공유해드립니다.",
-          date: "April 24, 2019",
-          number: 2,
-        },
-      ],
+      postData: postData,
+      cnt: 0,
+      tabNum: 0,
     };
   },
-  components: {},
+  components: {
+    Container,
+  },
+  methods: {
+    more() {
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.cnt}.json`)
+        .then((result) => {
+          console.log(result.data);
+          this.postData.push(result.data);
+          this.cnt += 1;
+        });
+    },
+  },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  margin: 0;
+}
+ul {
+  padding: 5px;
+  list-style-type: none;
+}
+.logo {
+  width: 22px;
+  margin: auto;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 13px;
+}
+.header {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  padding-bottom: 8px;
+  position: sticky;
+  top: 0;
+}
+.header-button-left {
+  color: skyblue;
+  float: left;
+  width: 50px;
+  padding-left: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.header-button-right {
+  color: skyblue;
+  float: right;
+  width: 50px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.footer {
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  padding-bottom: 10px;
+  background-color: white;
+}
+.footer-button-plus {
+  width: 80px;
+  margin: auto;
   text-align: center;
-  color: #2c3e50;
+  cursor: pointer;
+  font-size: 24px;
+  padding-top: 12px;
+}
+.sample-box {
+  width: 100%;
+  height: 600px;
+  background-color: bisque;
+}
+.inputfile {
+  display: none;
+}
+.input-plus {
+  cursor: pointer;
+}
+#app {
+  box-sizing: border-box;
+  font-family: "consolas";
+  margin-top: 60px;
+  width: 100%;
+  max-width: 460px;
+  margin: auto;
+  position: relative;
+  border-right: 1px solid #eee;
+  border-left: 1px solid #eee;
 }
 
-a{
-  text-decoration: none;
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }
 </style>
