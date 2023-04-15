@@ -7,7 +7,8 @@
 
    <!-- 필터선택페이지 -->
    <div v-if="tabNum == 1">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image:url(${imgURL})`"
+      ></div>
       <div class="filters">
          <div class="filter-1"></div>
          <div class="filter-1"></div>
@@ -19,12 +20,18 @@
 
    <!-- 글작성페이지 -->
    <div v-if="tabNum == 2">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image:url(${imgURL})`"
+      ></div>
       <div class="write">
-         <textarea class="write-box">write!</textarea>
+         <textarea v-model="text" class="write-box">{text}</textarea>
+      </div>
+      <div class="text-center">
+         <p>Save하시고 상단에 발행을 눌러야 업로드 됩니다.</p>
+         <button @click="posting" class="btn btn-outline-success">
+            Save
+         </button>
       </div>
    </div>
-
 </template>
 
 <script>
@@ -32,12 +39,35 @@ import Post from "./Post.vue";
 
 export default {
    name: "Container",
+   data() {
+      return {
+         text: "write!!",
+         uploadData: {},
+      };
+   },
+   methods: {
+      posting() {
+         this.uploadData = {
+            name: "Idol",
+            userImage: this.imgURL,
+            postImage: this.imgURL,
+            likes: 324,
+            date: "March 24",
+            liked: false,
+            content: this.text,
+            filter: "perpetua",
+         };
+
+         this.$emit('send', this.uploadData);
+      },
+   },
    components: {
       Post,
    },
    props: {
       postData: Array,
       tabNum: Number,
+      imgURL: String,
    },
 };
 </script>

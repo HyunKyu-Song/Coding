@@ -1,15 +1,16 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li @click="prev">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="tabNum != 2" @click="next">Next</li>
+      <li v-if="tabNum == 2" @click="postUpload">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :postData="postData" :tabNum="tabNum"/>
+  <Container @send="newData = $event" :postData="postData" :tabNum="tabNum" :imgURL="imgURL" />
   <div class="text-center mt-3">
     <button @click="tabNum=0" class="btn btn-outline-primary" >메인</button>
     <button @click="tabNum=1" class="btn btn-outline-primary mx-3">필터</button>
@@ -21,7 +22,7 @@
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -39,12 +40,18 @@ export default {
       postData: postData,
       cnt: 0,
       tabNum: 0,
+      imgURL: '',
+      newData:{},
     };
   },
   components: {
     Container,
   },
   methods: {
+    postUpload(){
+      this.postData.unshift(this.newData);
+      this.tabNum = 0;
+    },
     more() {
       axios
         .get(`https://codingapple1.github.io/vue/more${this.cnt}.json`)
@@ -53,6 +60,22 @@ export default {
           this.postData.push(result.data);
           this.cnt += 1;
         });
+    },
+    upload(e){
+      let img = e.target.files;
+      let url = URL.createObjectURL(img[0]);
+      this.tabNum = 1;
+      this.imgURL = url;
+    },
+    next(){
+      if(this.tabNum < 2){
+        this.tabNum++;
+      }
+    },
+    prev(){
+      if(this.tabNum > 0){
+        this.tabNum--;
+      }
     },
   },
 };
