@@ -1,31 +1,27 @@
 <template>
    <div v-if="tabNum == 0">
       <div v-for="(item, i) in postData" :key="i">
-         <Post :postData="postData" :num="i" />
+         <Post :postData="postData" :num="i" :selFilter="selFilter" />
       </div>
    </div>
 
    <!-- 필터선택페이지 -->
    <div v-if="tabNum == 1">
-      <div class="upload-image" :style="`background-image:url(${imgURL})`"
+      <div :class="`${selFilter} upload-image`" :style="`background-image:url(${imgURL})`"
       ></div>
       <div class="filters">
-         <div class="filter-1"></div>
-         <div class="filter-1"></div>
-         <div class="filter-1"></div>
-         <div class="filter-1"></div>
-         <div class="filter-1"></div>
+         <FilterBox v-for="(item, i) in filterData" :key="i" :filterName="item" :imgURL="imgURL">{{item}}</FilterBox>
       </div>
    </div>
 
    <!-- 글작성페이지 -->
    <div v-if="tabNum == 2">
-      <div class="upload-image" :style="`background-image:url(${imgURL})`"
+      <div :class="`upload-image ${selFilter}`" :style="`background-image:url(${imgURL})`"
       ></div>
       <div class="write">
          <textarea v-model="text" class="write-box">{text}</textarea>
       </div>
-      <div class="text-center">
+      <div class="text-center mt-4">
          <p>Save하시고 상단에 발행을 눌러야 업로드 됩니다.</p>
          <button @click="posting" class="btn btn-outline-success">
             Save
@@ -36,6 +32,8 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
+import filterData from "./../assets/filterData.js";
 
 export default {
    name: "Container",
@@ -43,6 +41,7 @@ export default {
       return {
          text: "write!!",
          uploadData: {},
+         filterData : filterData,
       };
    },
    methods: {
@@ -55,7 +54,7 @@ export default {
             date: "March 24",
             liked: false,
             content: this.text,
-            filter: "perpetua",
+            filter: this.selFilter,
          };
 
          this.$emit('send', this.uploadData);
@@ -63,11 +62,13 @@ export default {
    },
    components: {
       Post,
+      FilterBox,
    },
    props: {
       postData: Array,
       tabNum: Number,
       imgURL: String,
+      selFilter: String,
    },
 };
 </script>

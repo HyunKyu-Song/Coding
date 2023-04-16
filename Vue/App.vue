@@ -1,26 +1,26 @@
 <template>
   <div class="header">
-    <ul class="header-button-left">
+    <ul class="header-button-left" v-if="tabNum == 1 || tabNum == 2">
       <li @click="prev">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li v-if="tabNum != 2" @click="next">Next</li>
+      <li v-if="tabNum == 1" @click="next">Next</li>
       <li v-if="tabNum == 2" @click="postUpload">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container @send="newData = $event" :postData="postData" :tabNum="tabNum" :imgURL="imgURL" />
-  <div class="text-center mt-3">
+  <Container @send="newData = $event" :selFilter="selFilter" :postData="postData" :tabNum="tabNum" :imgURL="imgURL" />
+  <!-- <div class="text-center mt-3">
     <button @click="tabNum=0" class="btn btn-outline-primary" >메인</button>
     <button @click="tabNum=1" class="btn btn-outline-primary mx-3">필터</button>
     <button @click="tabNum=2" class="btn btn-outline-primary">글작성</button>
-  </div>
-  <div class="text-center mt-4">
+  </div> -->
+  <div class="text-center mt-4" v-if="tabNum == 0">
     <button @click="more" class="btn btn-outline-dark">more</button>
   </div>
 
-  <div class="footer">
+  <div class="footer" v-if="tabNum == 0 || tabNum == 1">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
@@ -42,8 +42,16 @@ export default {
       tabNum: 0,
       imgURL: '',
       newData:{},
+      selFilter:'',
     };
   },
+  mounted(){
+    this.emitter.on('selectFilter', (data)=>{
+      //console.log(data);
+      this.selFilter = data;
+    })
+  }
+  ,
   components: {
     Container,
   },
@@ -66,6 +74,7 @@ export default {
       let url = URL.createObjectURL(img[0]);
       this.tabNum = 1;
       this.imgURL = url;
+      this.selFilter = '';
     },
     next(){
       if(this.tabNum < 2){
