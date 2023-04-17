@@ -10,12 +10,14 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <!-- <p>{{likes}}</p>
+  <p>{{likesCnt}}</p> -->
+
+  <!-- <p>more {{$store.state.more}} </p>
+  <button @click="$store.dispatch('moreData')">더보기</button> -->
+
   <Container @send="newData = $event" :selFilter="selFilter" :postData="postData" :tabNum="tabNum" :imgURL="imgURL" />
-  <!-- <div class="text-center mt-3">
-    <button @click="tabNum=0" class="btn btn-outline-primary" >메인</button>
-    <button @click="tabNum=1" class="btn btn-outline-primary mx-3">필터</button>
-    <button @click="tabNum=2" class="btn btn-outline-primary">글작성</button>
-  </div> -->
+
   <div class="text-center mt-4" v-if="tabNum == 0">
     <button @click="more" class="btn btn-outline-dark">more</button>
   </div>
@@ -32,6 +34,7 @@
 import Container from "./components/Container.vue";
 import postData from "./assets/postData.js";
 import axios from "axios";
+import {mapMutations, mapState} from 'vuex'
 
 export default {
   name: "App",
@@ -43,6 +46,7 @@ export default {
       imgURL: '',
       newData:{},
       selFilter:'',
+      counter: 0,
     };
   },
   mounted(){
@@ -50,12 +54,21 @@ export default {
       //console.log(data);
       this.selFilter = data;
     })
-  }
-  ,
+  },
   components: {
     Container,
   },
+  computed:{
+    now2(){
+      return new Date();
+    },
+    ...mapState(['likes', 'likesCnt'])
+  },
   methods: {
+    ...mapMutations(['setLikes', 'setMore']),
+    now(){
+      return new Date();
+    },
     postUpload(){
       this.postData.unshift(this.newData);
       this.tabNum = 0;
