@@ -28,12 +28,17 @@
          </button>
       </div>
    </div>
+
+   <div v-if="tabNum == 3">
+      <MyPage />
+   </div>
 </template>
 
 <script>
 import Post from "./Post.vue";
 import FilterBox from "./FilterBox.vue";
 import filterData from "./../assets/filterData.js";
+import MyPage from "./MyPage.vue";
 
 export default {
    name: "Container",
@@ -63,6 +68,7 @@ export default {
    components: {
       Post,
       FilterBox,
+      MyPage,
    },
    props: {
       postData: Array,

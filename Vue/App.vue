@@ -42,7 +42,7 @@ export default {
     return {
       postData: postData,
       cnt: 0,
-      tabNum: 0,
+      tabNum: 3,
       imgURL: '',
       newData:{},
       selFilter:'',
