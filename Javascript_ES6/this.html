@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>this</title>
+</head>
+
+<body>
+   <button class="btn">버튼입니다</button>
+
+   <script>
+      // document.querySelector('.btn').addEventListener('click', function (e) {
+      //    var arr = [1, 2, 3];
+      //    arr.forEach(function (item) {
+      //       console.log(this);
+      //    });
+      // })
+
+      // var obj = {
+      //    names : ['Kim', 'Lee', 'Park'],
+      //    func(){
+      //       console.log(this);
+      //       obj.names.forEach(()=>{
+      //          console.log(this);
+      //       })
+      //    }
+      // }
+      // obj.func();
+
+      // function func1(){
+      //    console.log('func1')
+      // }
+      // func1()
+
+      // var func2 = function(){
+      //    console.log('func2');
+      // }
+      // func2()
+
+      // [1, 2, 3, 4].forEach(a => console.log(a));
+
+      // var people = {
+      //    name : 'son',
+      //    sayHi : function(){
+      //       console.log(`안녕 나는 ${this.name}`);
+      //    }
+      // }
+      // people.sayHi();
+
+      // var 자료 = {
+      //    data : [1, 2, 3, 4, 5],
+      //    전부더하기 : function(){
+      //       var sum=0;
+      //       this.data.forEach(function(item){
+      //          sum += item;
+      //       })
+      //       console.log(sum);
+      //    }
+      // }
+      // 자료.전부더하기();
+
+      document.querySelector('.btn').addEventListener('click', function(e){
+         var a = this.innerHTML;
+         setTimeout(function(){
+            console.log(a);
+            // console.log(this.innerHTML);
+         }, 1000)
+      })
+
+   </script>
+</body>
+
+</html>

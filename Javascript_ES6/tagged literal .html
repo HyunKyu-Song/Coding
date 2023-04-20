@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>tagged literal </title>
+</head>
+
+<body>
+   <script>
+      var pants = 20;
+      var socks = 100;
+
+      function func(문자, 변수1, 변수2){
+         console.log(문자[1] + 변수1 + ' ' +문자[0] + 변수2)
+         console.log(`${문자[1]}${변수1} ${문자[0]}${변수2}`)
+      }
+      func`바지${pants} 양말${socks}`;
+
+
+      function func2(문자, 변수1, 변수2){
+         if(변수1 === 0)
+            console.log(`바지품절 양말${변수2}`);
+         else
+            console.log(`바지${변수1} 양말${변수2}`)
+      }
+      func2`바지${pants} 양말${socks}`
+
+
+      var name = 'song';
+      var str = `hi ${name} 입니다`;
+      function 해체분석기(문자들, 변수들) {
+         console.log(문자들);	// ['hi', '입니다']
+         console.log(변수들);	// 'song'
+      }
+      해체분석기`hi ${name} 입니다`
+   </script>
+</body>
+
+</html>
