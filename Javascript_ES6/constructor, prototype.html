@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>constructor, prototype</title>
+</head>
+
+<body>
+   <script>
+      // function Product(inp1, inp2) {
+      //    this.name = inp1;
+      //    this.price = inp2;
+      //    this.vat = function () {
+      //       console.log(`부가세: ${this.price * 0.1}`);
+      //    }
+      // }
+
+      // var product1 = new Product('shirts', 50000);
+      // var product2 = new Product('pants', 60000);
+      // console.log(product1.vat())
+      // console.log(product2)
+
+
+
+      // function Student(name, age){
+      //    this.name = name;
+      //    this.age = age;
+      //    this.sayHi = function(){
+      //       console.log(`안녕, 나는 ${this.name}이야`);
+      //    }
+      // }
+
+      // var 학생1 = new Student('song', 49);
+      // 학생1.sayHi();
+
+
+      // function Student(이름, 나이) {
+      //    this.name = 이름;
+      //    this.age = 나이;
+      // }
+
+      // Student.prototype.sayHi = () => {
+      //    console.log('안녕 나는 ' + this.name + '이야');
+      // }
+      // var 학생1 = new Student('Kim', 20);
+      // 학생1.sayHi(); //왜 이 코드가 제대로 안나오죠?
+
+
+
+      Array.prototype.remove3 = function(){
+         for(var i = 0; i < this.length; i++){
+            if(this[i] === 3){
+               this.splice(i, 1);
+            }
+         }
+      };
+      
+      var arr = [1, 2, 3, 4, 5];
+      arr.remove3()
+      console.log(arr);
+
+   </script>
+</body>
+
+</html>
