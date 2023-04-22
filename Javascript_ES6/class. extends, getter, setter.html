@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>class, extends, getter, setter</title>
+</head>
+
+<body>
+   <script>
+      class 강아지 {
+         constructor(type, color) {
+            this.type = type;
+            this.color = color;
+         }
+         addAge() {
+            this.age++;
+         }
+      }
+      var 강아지1 = new 강아지('말티즈', 'white');
+      var 강아지2 = new 강아지('진돗개', 'brown');
+
+
+      class 고양이 extends 강아지 {
+         constructor(type, color, age) {
+            super(type, color);
+            this.age = age;
+         }
+         addAge() {
+            super.addAge();
+         }
+      }
+      var 고양이1 = new 고양이('코숏', 'white', 5);
+      var 고양이2 = new 고양이('러시안블루', 'brown', 2);
+
+
+      class Unit {
+         constructor() {
+            this.attack = 5;
+            this.hp = 100;
+         }
+         get battlePoint() {
+            return this.attack + this.hp;
+         }
+         set heal(up) {
+            this.hp += up;
+         }
+      }
+      var user1 = new Unit();
+
+
+      var data = {
+         odd: [],
+         even: [],
+         set setter(num) {
+            if (num % 2 === 0)
+               this.even.push(num);
+            else
+               this.odd.push(num);
+         },
+         get sortNum() {
+            var a = [...this.even, ...this.odd];
+            return a.sort();
+         }
+      }
+
+
+      let 신체정보 = {
+         body: {
+            height: 190,
+            weight: 70
+         },
+         size: ["상의 Large", "바지 30인치"],
+      };
+
+   </script>
+</body>
+
+</html>
