@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Promise</title>
+</head>
+
+<body>
+   <!-- <img id="test" src="https://codingapple1.github.io/kona.jpg"> -->
+   <button class="btn">성공 판정 버튼</button>
+
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script>
+      // var test = document.querySelector('#test');
+      // var 프로미스 = new Promise(function (resolve, reject) {
+      //    test.addEventListener('load', function () {
+      //       resolve();
+      //    })
+
+      //    test.addEventListener('error', function () {
+      //       reject();
+      //    })
+      // })
+
+      // 프로미스.then(function () {
+      //    console.log('이미지 로딩 완료!');
+      // }).catch(function () {
+      //    console.log('이미지 로딩 실패!');
+      // })
+
+
+
+      // var 프로미스 = new Promise(function (resolve, reject) {
+      //    $.get('https://codingapple1.github.io/hello.txt')
+      //       .done(function (data) {
+      //          resolve(data);
+      //       })
+      //       .fail(function () {
+      //          reject();
+      //       })
+      // })
+
+      // 프로미스.then(function(data){
+      //    console.log(data);
+      // }).catch(function(){
+      //    console.log('fail!!')
+      // })
+
+
+
+      // var 프로미스 = new Promise(function (resolve, reject) {
+      //    $.get('https://codingapple1.github.io/hello.txt')
+      //       .done(function (data) {
+      //          resolve(data);
+      //       })
+      //       .fail(function () {
+      //          reject();
+      //       })
+      // })
+
+      // 프로미스
+      //    .then(function (data) {
+      //       console.log(data);
+
+      //       var 프로미스2 = new Promise(function (resolve, reject) {
+      //          $.get('https://codingapple1.github.io/hello2.txt')
+      //             .done(function (data2) {
+      //                resolve(data2);
+      //             })
+      //             .fail(function () {
+      //                reject();
+      //             })
+      //       })
+
+      //       return 프로미스2;
+      //    })
+      //    .then(function (data2) {
+      //       console.log(data2);
+      //    })
+      //    .catch(function () {
+      //       console.log('fail!!')
+      //    })
+
+
+
+      // async function 더하기(){
+      //    var 프로미스 = new Promise(function(resolve, reject){
+      //       var 힘든연산 = 1 + 1;
+      //       resolve(100);
+      //    })
+
+      //    try{  //try를 먼저 실행해보고 error가 나면 catch를 실행
+      //       var result = await 프로미스;
+      //       console.log(result);
+      //    }
+      //    catch{
+      //       console.log('프로미스 연산이 실패');
+      //    }
+      // }
+
+
+
+      async function 판정버튼(){
+         var 프로미스 = new Promise(function(resolve, reject){
+            document.querySelector('.btn').addEventListener('click', function(){
+               resolve('성공했음 ㄷㄷ');
+            })
+         })
+
+         // var result = await 프로미스;
+         // console.log(result);
+         try{
+            var result = await 프로미스;
+            console.log(result);
+         }
+         catch{
+            console.log('실패함 ㅅㄱ');
+         }
+      }
+      판정버튼()
+   </script>
+</body>
+
+</html>
