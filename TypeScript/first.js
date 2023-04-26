@@ -6,7 +6,6 @@ var example5 = 'apple';
 function example6(inp) {
     return inp + 2;
 }
-console.log(example6(5)); //7이 출력됨
 var example7 = ['first', 10];
 var User = /** @class */ (function () {
     function User(name) {

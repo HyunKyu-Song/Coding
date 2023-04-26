@@ -12,7 +12,7 @@ let example5: A = 'apple';
 function example6(inp: number): number {
    return inp + 2;
 }
-console.log(example6(5)) //7이 출력됨
+//console.log(example6(5)) //7이 출력됨
 
 type B = [string, number];
 let example7: B = ['first', 10];
