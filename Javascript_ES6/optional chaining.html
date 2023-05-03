@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>optional chaining</title>
+</head>
+
+<body>
+   <script>
+      var user = {
+         name: 'song',
+         // age: {value: 15},
+      }
+      console.log(user.age?.value);
+
+      var user = {
+         name: 'song'
+      }
+      console.log(user?.name111)
+
+      
+      console.log(null ?? 'Loading...');
+      console.log(undefined ?? 'Loading...');
+   </script>
+</body>
+
+</html>
