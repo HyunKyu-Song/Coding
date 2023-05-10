@@ -1,0 +1,44 @@
+body{
+   margin: 0;
+   background-color: #303030;
+}
+
+.navbar{
+   background-color: rgba(255, 255, 255, 0.873);
+   padding: 20px;
+   text-align: center;
+}
+
+.navbar a{
+   color: black;
+   margin-right: 20px;
+   text-decoration: none;
+}
+
+.title{
+   text-align: center;
+   margin-top: 150px;
+   color: white;
+}
+
+.goods{
+   background-color: white;
+   padding: 20px;
+   border-radius: 20px;
+   width: 200px;
+   margin: auto;
+   margin-bottom: 30px;
+}
+
+.goods img{
+   width: 100%;
+}
+
+.cart-item{
+   display: flex;
+   justify-content: space-evenly;
+   margin: auto;
+   width: 50%;
+   color: white;
+   border-bottom: 1px solid white;
+}
