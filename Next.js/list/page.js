@@ -1,4 +1,6 @@
 /*eslint-disable*/
+'use client'
+import { useState } from "react";
 
 export default function List() {
    let product = [
@@ -15,6 +17,7 @@ export default function List() {
          price: '24,900'
       },
    ];
+   let [cnt, setCnt] = useState([10, 20, 30]);
 
    return (
       <div>
@@ -27,6 +30,15 @@ export default function List() {
                         <img src={`./${item.model}.jpg`} className="good-img"></img>
                         <h3>상품명: {item.model}</h3>
                         <h4>가격: {item.price}원</h4>
+                        <span>주문량: {cnt[i]}</span> <button onClick={()=>{
+                           let copy = [...cnt];
+                           copy[i] = copy[i]+1;
+                           setCnt(copy);
+                        }}>+</button> <button onClick={()=>{
+                           let copy = [...cnt];
+                           copy[i] = copy[i]-1;
+                           setCnt(copy);
+                        }}>–</button>
                      </div>
                   )
                })
