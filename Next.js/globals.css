@@ -1,44 +1,51 @@
 body{
-   margin: 0;
-   background-color: #303030;
+  margin: 0;
 }
 
 .navbar{
-   background-color: rgba(255, 255, 255, 0.873);
-   padding: 20px;
-   text-align: center;
+  background-color: #303030;
+  padding: 20px;
+  text-align: center;
 }
 
 .navbar a{
-   color: black;
-   margin-right: 20px;
-   text-decoration: none;
+  color: coral;
+  text-decoration: none;
+  margin: 20px;
 }
 
-.title{
-   text-align: center;
-   margin-top: 150px;
-   color: white;
+.list-container, .detail-container{
+  width: 50%;
+  margin: auto;
 }
 
-.goods{
-   background-color: white;
-   padding: 20px;
-   border-radius: 20px;
-   width: 200px;
-   margin: auto;
-   margin-bottom: 30px;
+.list-title, .detail-title{
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
 }
 
-.goods img{
-   width: 100%;
+.list-item{
+  border: 2px solid #303030;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: #303030 10px 10px 5px 0px;
 }
 
-.cart-item{
-   display: flex;
-   justify-content: space-evenly;
-   margin: auto;
-   width: 50%;
-   color: white;
-   border-bottom: 1px solid white;
+.list-item a{
+  text-decoration: none;
+  color: black;
+}
+
+.detail-item{
+  border: 5px solid #303030;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.list-item:hover{
+  transform: scale(1.02);
 }

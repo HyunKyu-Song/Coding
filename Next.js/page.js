@@ -1,7 +1,15 @@
-export default function Home() {
+import { connectDB } from "@/util/database.js";
+
+export default async function Home() {
+
+  const client = await connectDB;
+  const db = client.db("forum");
+  let result = await db.collection('post').find().toArray();
+  // console.log(result);
+
   return (
     <div>
-      <h2 className="title">Next.js</h2>
+      <h2>Home</h2>
     </div>
   )
 }
