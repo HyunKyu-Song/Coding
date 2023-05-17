@@ -19,12 +19,12 @@ body{
   margin: 20px;
 }
 
-.list-container, .detail-container, .write-container{
+.list-container, .detail-container, .write-container, .signUp-container{
   width: 50%;
   margin: auto;
 }
 
-.list-title, .detail-title, .write-title{
+.list-title, .detail-title, .write-title, .signUp-title{
   text-align: center;
   padding: 20px;
   border-top: 1px solid;

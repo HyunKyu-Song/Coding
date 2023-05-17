@@ -6,7 +6,7 @@ export default async function Detail(props) {
    const client = await connectDB;
    const db = client.db("forum");
    let result = await db.collection('post').findOne({ _id: new ObjectId(`${props.params.id}`) });
-   console.log(props)
+   //console.log(props)
 
    return (
       <div className="detail-container">
@@ -17,8 +17,10 @@ export default async function Detail(props) {
                   : '50px'
             }}>글제목: {result.title}</h3>
             <p>내용: {result.content}</p>
-            <p>작성자: {result.content}</p>
-            <p>작성날짜: {result.content}</p>
+            <p>작성자: {result.writer}</p>
+            {/* <p>작성날짜: {result.time}</p> */}
+            <div style={{ textAlign: 'center' }}>
+            </div>
          </div>
       </div>
    )

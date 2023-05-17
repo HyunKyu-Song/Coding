@@ -1,15 +1,13 @@
 import { connectDB } from "@/util/database.js";
+import { ObjectId } from "mongodb";
 
 export default async function Update(req, res) {
 
    const client = await connectDB;
    const db = client.db("forum");
+   // console.log(req.body._id)
 
-   req.body.num = parseInt(req.body.num);
-
-   let result = await db.collection('post').findOne({num : req.body.num})
-
-   await db.collection('post').updateOne({ num: result.num}, {$set : req.body})
+   await db.collection('post').updateOne({ _id: new ObjectId(req.body._id)}, {$set : {title : req.body.title, content : req.body.content}})
 
    return res.redirect(302, '/list');
 }

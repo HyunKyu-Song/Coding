@@ -18,14 +18,15 @@ export default function ListItem(props) {
                      <span onClick={function(e){
                         fetch('/api/delete', {
                            method : 'DELETE',
-                           // body : item._id,
-                           body : item.writer,
+                           body : item._id,
+                           // body : item.writer,
                         })
                         .then(res => {
                            if(res.status != 500){
                               e.target.parentElement.classList.add('fadeOut')
                               setTimeout(()=>{
-                                 e.target.parentElement.style.display = 'none';
+                                 // e.target.parentElement.style.display = 'none';
+                                 location.reload();
                               }, 500)
                               console.log('성공')
                            }
