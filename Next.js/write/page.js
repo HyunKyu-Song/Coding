@@ -1,4 +1,9 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import WriteBtn from "./WriteBtn";
+
 export default async function Write() {
+   let session = await getServerSession(authOptions);
    return (
       <div className="write-container">
          <h2 className="write-title">글 작성</h2>
@@ -14,7 +19,7 @@ export default async function Write() {
                {/* <div>
                   <input type="text" name="writer" placeholder="작성자"></input>
                </div> */}
-               <button type="submit">전송</button>
+               <WriteBtn session={session} />
             </fieldset>
          </form>
       </div>

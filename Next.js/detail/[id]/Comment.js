@@ -53,20 +53,25 @@ export default function Comment(props) {
             <input onInput={(e) => {
                setComment(e.target.value);
             }} /> <button onClick={() => {
-               fetch('/api/ment', {
-                  method: 'POST',
-                  body: JSON.stringify({ parent: props.parent, comment: comment, writer: props.writer, mentWriter: props.mentWriter }),
-               })
-               // .then(res=>res.json())
-               // .then(function(data){
-               //    // console.log('받은 data: ');
-               //    // console.log(data);
-               //    setComment2(data);
-               //    // let copy = [...comment2];
-               //    // copy.push(data);
-               //    // setComment2(copy);
-               // })
-               location.reload();
+               if(props.mentWriter != '비회원'){
+                  fetch('/api/ment', {
+                     method: 'POST',
+                     body: JSON.stringify({ parent: props.parent, comment: comment, writer: props.writer, mentWriter: props.mentWriter }),
+                  })
+                  // .then(res=>res.json())
+                  // .then(function(data){
+                  //    // console.log('받은 data: ');
+                  //    // console.log(data);
+                  //    setComment2(data);
+                  //    // let copy = [...comment2];
+                  //    // copy.push(data);
+                  //    // setComment2(copy);
+                  // })
+                  location.reload();
+               }
+               else{
+                  alert('로그인 후 댓글을 작성할 수 있습니다.');
+               }
             }}>댓글전송</button>
          </div>
       </>

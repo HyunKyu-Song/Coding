@@ -16,7 +16,6 @@ export default async function Detail(props) {
    // console.log('start');
    // console.log(ment);
    // console.log('end');
-
    return (
       <div className="detail-container">
          <h2 className="detail-title">상세정보</h2>
@@ -24,20 +23,11 @@ export default async function Detail(props) {
             <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>글제목: {result.title}</h3>
             <p>내용: {result.content}</p>
             <p>작성자: {result.writer}</p>
-            {/* <div>
-               <hr />
-               <h3>댓글</h3>
-               {
-                  ment.map(function (item, i) {
-                     return (
-                        <div key={i} style={{marginBottom:'20px'}}>
-                           {item.content}
-                        </div>
-                     )
-                  })
-               }
-            </div> */}
-            <Comment parent={result._id} writer={result.writer} ment={ment} mentWriter={session.user.userId}/>
+            {
+               session != null 
+               ? <Comment parent={result._id} writer={result.writer} ment={ment} mentWriter={session.user.userId}/> 
+               : <Comment parent={result._id} writer={result.writer} ment={ment} mentWriter='비회원'/>
+            }
          </div>
       </div>
    )

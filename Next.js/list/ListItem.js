@@ -31,6 +31,7 @@ export default function ListItem(props) {
                               console.log('성공')
                            }
                            else{
+                              alert('해당 작성자만 삭제가능');
                               console.log('삭제실패')
                               console.log(res)
                            }
