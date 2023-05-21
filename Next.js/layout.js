@@ -1,8 +1,7 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
 import Link from "next/link";
-
-const inter = Inter({ subsets: ['latin'] })
+import { cookies } from 'next/headers'
+import ModeBtn from './ModeBtn';
 
 export const metadata = {
   title: 'Forum',
@@ -10,12 +9,18 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  let a = cookies().get('mode')
+  // console.log(a.value)
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html>
+      <body className={
+        a.value != undefined && a.value == 'dark' ? 'dark' : null
+      }>
         <div className="navbar">
           <Link href={'/'}>Home</Link>
+          <Link href={'/write'}>Write</Link>
           <Link href={'/list'}>List</Link>
+          <ModeBtn mode={a.value == 'dark' ? '🌙' : '🌞'}/>
         </div>
         {children}
       </body>

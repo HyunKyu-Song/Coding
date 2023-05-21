@@ -2,6 +2,11 @@ body{
   margin: 0;
 }
 
+.dark{
+  background-color: #303030;
+  color: whitesmoke;
+}
+
 .fadeOut{
   opacity: 0;
   transition: all 0.5s;
