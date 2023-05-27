@@ -9,67 +9,34 @@
 </head>
 
 <body>
-   <button class="btn">버튼입니다</button>
-
    <script>
-      // document.querySelector('.btn').addEventListener('click', function (e) {
-      //    var arr = [1, 2, 3];
-      //    arr.forEach(function (item) {
-      //       console.log(this);
-      //    });
-      // })
+      class grandParent{
+         constructor(age, nation){
+            this.name = 'song';
+            this.age = age;
+            this.nation = nation;
+            this.func = function(){
+               console.log('bye~');
+            }
+         }
+         sayHello(){
+            console.log('hello~');
+         }
+      }
 
-      // var obj = {
-      //    names : ['Kim', 'Lee', 'Park'],
-      //    func(){
-      //       console.log(this);
-      //       obj.names.forEach(()=>{
-      //          console.log(this);
-      //       })
-      //    }
-      // }
-      // obj.func();
+      class father extends grandParent{
+         constructor(x, y, gender){
+            super(x, y)
+            this.apple = 'good';
+            this.gender = gender;
+         }
+      }
 
-      // function func1(){
-      //    console.log('func1')
-      // }
-      // func1()
+      let a = new grandParent(10, 'korea');
+      console.log(a)
 
-      // var func2 = function(){
-      //    console.log('func2');
-      // }
-      // func2()
-
-      // [1, 2, 3, 4].forEach(a => console.log(a));
-
-      // var people = {
-      //    name : 'son',
-      //    sayHi : function(){
-      //       console.log(`안녕 나는 ${this.name}`);
-      //    }
-      // }
-      // people.sayHi();
-
-      // var 자료 = {
-      //    data : [1, 2, 3, 4, 5],
-      //    전부더하기 : function(){
-      //       var sum=0;
-      //       this.data.forEach(function(item){
-      //          sum += item;
-      //       })
-      //       console.log(sum);
-      //    }
-      // }
-      // 자료.전부더하기();
-
-      document.querySelector('.btn').addEventListener('click', function(e){
-         var a = this.innerHTML;
-         setTimeout(function(){
-            console.log(a);
-            // console.log(this.innerHTML);
-         }, 1000)
-      })
-
+      let aa = new father(26, 'america', 'female');
+      console.log(aa)
    </script>
 </body>
 
