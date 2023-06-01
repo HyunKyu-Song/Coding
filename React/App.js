@@ -2,33 +2,108 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fa4, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import 사진 from './nj.jpg';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+
+import Quiz from './Quiz.js';
+import Menu from './Menu';
+import Category from './Category';
 
 function App() {
-  let [cnt, setCnt] = useState(0);
-  let [check, setCheck] = useState(['apple', 'melon', 'banana', 'strawberry', 'mango']);
-  var [b, setB] = useState(null);
-
-  // useEffect(() => {
-  //   axios.get('https://hyunkyu-song.github.io/GoodsShop/LESSERAFIM/LESSERAFIM.json')
-  //     .then(res => {
-  //       // setB(res.data)
-  //       setB(res.data);
-  //       console.log(b);
-
-  //     })
-  // }, [])
+  let [data, setData] = useState(null);
+  let [showArrow, setShowArrow] = useState('');
+  let [num, setNum] = useState(0);
+  let [check, setCheck] = useState([]);
+  let [checkOrigin, setCheckOrigin] = useState(['white', 'white', 'white', 'white', 'white']);
+  let [alert, setAlert] = useState('');
+  let navigate = useNavigate();
 
   return (
     <div>
 
       <nav>
-        <li>START</li>
-        <li>Record</li>
+        <li onClick={() => {
+          navigate('/peopleQuiz')
+          axios('https://hyunkyu-song.github.io/game/quizData.json')
+            .then(res => {
+              console.log(res.data);
+              setData(res.data);
+              setShowArrow('show ')
+            })
+        }}>START</li>
+        <li onClick={() => {
+          navigate('/')
+          location.reload();
+        }}>Reset</li>
       </nav>
+
+      <div className={`alert-answer ${alert}`}>
+        정답: {data == null ? null : data[num].answer + 1}
+      </div>
+
+      <Routes>
+        <Route path='/' element={<Menu navigate={navigate} setData={setData} setShowArrow={setShowArrow} />} />
+        <Route path='/peopleQuiz/category' element={<div>{data == null ?null : <Category/>}</div>} />
+
+
+        
+        <Route path='/peopleQuiz/:id' element={<div>{
+          data == null ?
+            null : <Quiz ex={data} 문제번호={num} 문제번호변경={setNum} check={check} setCheck={setCheck} checkOrigin={checkOrigin} setAlert={setAlert} />
+        }</div>} />
+
+
+
+        <Route path='/c' element={<div className='a'>3</div>} />
+        <Route path='/d' element={<div className='a'>4</div>} />
+        {/* <Route path='/peopleQuiz/:id' element={<div><h2>맞나?</h2></div>} /> */}
+      </Routes>
 
       <main>
 
-        <div className='quiz'>
+        {/* <menu className='menu-container'>
+          <li onClick={() => {
+            navigate('/peopleQuiz')
+            axios('https://hyunkyu-song.github.io/game/quizData.json')
+              .then(res => {
+                console.log(res.data);
+                setData(res.data);
+                setShowArrow('show ')
+              })
+          }}>인물퀴즈 글ver</li>
+          <li>인물퀴즈 사진ver</li>
+          <li>게임3</li>
+          <li>게임4</li>
+        </menu> */}
+
+        {/* <div className='start'>START Click🖱!</div> */}
+
+
+        {/* <FontAwesomeIcon onClick={() => {
+          if (num != 0) {
+            setNum(num - 1);
+            let copy = [...checkOrigin];
+            setCheck(copy);
+            setAlert('');
+          }
+        }} className={`${showArrow} arrow left`} icon={faCaretLeft} />
+
+        <FontAwesomeIcon onClick={() => {
+          if (num < 4) {
+            setNum(num + 1);
+            let copy = [...checkOrigin];
+            setCheck(copy);
+            setAlert('');
+          }
+        }} className={`${showArrow} arrow right`} icon={faCaretRight} /> */}
+
+        {/* {
+          data == null ?
+            <div className='start'>START Click🖱!</div> : <Quiz ex={data} 문제번호={num} 문제번호변경={setNum} check={check} setCheck={setCheck} checkOrigin={checkOrigin} setAlert={setAlert} />
+        } */}
+        {/* <div className='quiz'>
 
           <div className='question'>
             <p>나는 누구일까요?</p>
@@ -39,44 +114,21 @@ function App() {
               <li>그룹</li>
               <li>외국인</li>
               <li>🐰</li>
-              {
-                b == null ? <div>문제보기</div> : <Card ex={b}/>
-              }
             </ul>
           </div>
 
-          <div className='example'>
-            <button onClick={() => {
-              axios.get('https://hyunkyu-song.github.io/GoodsShop/LESSERAFIM/LESSERAFIM.json')
-                .then(res => {
-                  // setB(res.data)
-                  setB(res.data);
-                  console.log(b);
-                })
-            }}>버튼</button>
-          </div>
+          {
+            data == null ? 
+            <div className='example'>START를 눌러주세요</div> : <Card ex={data}/>
+          }
 
 
-        </div>
+        </div> */}
 
       </main>
 
     </div>
   );
-}
-
-function Card(props) {
-  return (
-    <>
-      {
-        props.ex.map(function(item, i){
-          return(
-            <li>{item.name}</li>
-          )
-        })
-      }
-    </>
-  )
 }
 
 export default App;

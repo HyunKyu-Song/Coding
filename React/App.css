@@ -1,5 +1,10 @@
 body{
+  box-sizing: border-box;
   background-color: #213255;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 nav{
@@ -12,6 +17,7 @@ nav{
 }
 
 nav li{
+  cursor: pointer;
   padding: 20px;
 }
 
@@ -20,8 +26,6 @@ nav li:hover{
   transition: all 0.3s;
   color: coral;
 }
-
-
 
 .question{
   text-align: center;
@@ -36,28 +40,53 @@ nav li:hover{
   margin: auto;
   font-size: 2rem;
   color: whitesmoke;
-  /* background-color: #ddd; */
 }
 
 .hint li{
-  /* list-style: none; */
+  list-style: none;
   margin-bottom: 20px;
   border-bottom: 1px solid whitesmoke;
+}
+
+.start{
+  font-size: 4rem;
+  margin-top: 10%;
+  color: whitesmoke;
+  text-align: center;
 }
 
 .example{
   font-size: 1.5rem;
   color: whitesmoke;
-}
-
-.example ol{
+  text-align: center;
   display: flex;
   justify-content: space-evenly;
   list-style: none;
 }
 
+.submit{
+  width: 100%;
+  text-align: center;
+}
+
+.submit button{
+  font-size: 2rem;
+  margin: 50px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #213255;
+  border: 3px solid black;
+}
+.submit button:hover{
+  cursor: pointer;
+  background-color: rgb(68, 185, 84);
+  border: none;
+}
+
 .example li{
-  padding: 10px;
+  width: 180px;
+  padding: 10px 0px;
   border-radius: 20px;
   background-color: whitesmoke;
   color: black;
@@ -70,6 +99,106 @@ nav li:hover{
   transform: translateY(-5px);
 }
 
-.example .check{
-  background-color: coral;
+.arrow{
+  display: none;
+  cursor: pointer;
+  font-size: 10rem;
+  position: fixed;
+  top: 50%;
+}
+.left:hover{
+  color: #ddd;
+  transition: all 0.5s;
+  transform: translateX(-15px);
+}
+.right:hover{
+  color: #ddd;
+  transition: all 0.5s;
+  transform: translateX(15px);
+}
+.left{
+  left: 1%;
+}
+.right{
+  right: 1%;
+}
+
+.alert-answer{
+  display: none;
+  text-align: center;
+  font-size: 5rem;
+  color: #f75151;
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}
+
+@media screen and (max-width: 479px){
+  nav{font-size: 1.5rem;}
+
+	.start{font-size: 2rem;}
+  
+  .question{font-size: 1.3rem;}
+
+  .hint{
+    width: 20%;
+    font-size: 1rem;
+  }
+
+  .example{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .example li{margin-bottom: 15px;}
+
+  .submit button{
+    font-size: 1rem;
+    margin: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(68, 185, 84);
+  }
+
+  .alert-answer{font-size: 2rem;}
+}
+
+.a{
+  background-color: #aaa;
+  margin: 50px;
+  padding: 20px;
+}
+
+.menu-container{
+  width: 30%;
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+  overflow-x: hidden;
+  /* background-color: #aaa; */
+}
+
+.menu-container li{
+  list-style: none;
+  margin-bottom: 40px;
+  font-size: 4rem;
+  color: black;
+}
+
+.menu-container li:hover{
+  cursor: pointer;
+  /* border-bottom: 3px solid coral; */
+  animation-name: 밑줄;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  color: coral;
+  border-bottom: 3px solid coral;
+  transform: scale(1.2);
+  transition: all 0.3s;
 }
