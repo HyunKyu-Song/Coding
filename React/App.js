@@ -4,12 +4,13 @@ import './App.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fa4, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
-import 사진 from './nj.jpg';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 import Quiz from './Quiz.js';
 import Menu from './Menu';
 import Category from './Category';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChangeReSet, PlusScore, ResetQuizNum, ResetScore, ResetWriteAnswer} from './store';
 
 function App() {
   let [data, setData] = useState(null);
@@ -19,11 +20,17 @@ function App() {
   let [checkOrigin, setCheckOrigin] = useState(['white', 'white', 'white', 'white', 'white']);
   let [alert, setAlert] = useState('');
   let navigate = useNavigate();
+  let a = useSelector((state) => { return state })
+  console.log(a);
+
+  let dispatch = useDispatch();
 
   return (
     <div>
 
       <nav>
+        {/* <button onClick={()=>{dispatch(ChangeReSet())}}>{a.reSet}</button>
+        <button onClick={()=>{dispatch(PlusScore())}}>{a.score}</button> */}
         <li onClick={() => {
           navigate('/peopleQuiz')
           axios('https://hyunkyu-song.github.io/game/quizData.json')
@@ -35,25 +42,35 @@ function App() {
         }}>START</li>
         <li onClick={() => {
           navigate('/')
-          location.reload();
+          // dispatch(ChangeReSet())
+          dispatch(ResetScore())
+          dispatch(ResetQuizNum())
+          dispatch(ResetWriteAnswer())
+          console.log(a.score)
+          // location.reload();
         }}>Reset</li>
       </nav>
 
-      <div className={`alert-answer ${alert}`}>
+      {/* <div className={`alert-answer ${alert}`}>
         정답: {data == null ? null : data[num].answer + 1}
-      </div>
+      </div> */}
 
       <Routes>
-        <Route path='/' element={<Menu navigate={navigate} setData={setData} setShowArrow={setShowArrow} />} />
-        <Route path='/peopleQuiz/category' element={<div>{data == null ?null : <Category/>}</div>} />
+        <Route path='/' element={<Menu />} />
 
 
-        
-        <Route path='/peopleQuiz/:id' element={<div>{
-          data == null ?
-            null : <Quiz ex={data} 문제번호={num} 문제번호변경={setNum} check={check} setCheck={setCheck} checkOrigin={checkOrigin} setAlert={setAlert} />
-        }</div>} />
+        <Route path='/peopleQuiz/category' element={<Category setData={setData} setShowArrow={setShowArrow} />} />
 
+
+        <Route path='/peopleQuiz/:id' element={
+          <div>
+            {
+              data == null ?
+                null :
+                <Quiz ex={data} 문제번호={num} 문제번호변경={setNum} check={check} setCheck={setCheck} checkOrigin={checkOrigin} setAlert={setAlert} />
+            }
+          </div>
+        } />
 
 
         <Route path='/c' element={<div className='a'>3</div>} />

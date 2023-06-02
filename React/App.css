@@ -130,6 +130,70 @@ nav li:hover{
   color: #f75151;
 }
 
+.a{
+  background-color: #aaa;
+  margin: 50px;
+  padding: 20px;
+}
+
+.menu-container{
+  width: 30%;
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+  overflow-x: hidden;
+  /* background-color: #aaa; */
+}
+
+.menu-container li{
+  list-style: none;
+  margin-bottom: 40px;
+  font-size: 4rem;
+  color: black;
+}
+
+.menu-container li:hover{
+  cursor: pointer;
+  /* border-bottom: 3px solid coral; */
+  animation-name: 밑줄;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  color: coral;
+  border-bottom: 3px solid coral;
+  transform: scale(1.2);
+  transition: all 0.3s;
+}
+
+/* .quiz{
+  position: relative;
+} */
+
+.quizAlert{
+  display: none;
+  text-align: center;
+  width: 50%;
+  height: 80%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 20px;
+  position: absolute;
+  background-color: white;
+  opacity: 0.93;
+}
+.quizAlert h2{
+  font-size: 3rem;
+}
+.quizAlert p{
+  font-size: 2rem;
+  border-bottom: 2px solid black;
+  width: 50%;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
 .show{
   display: block;
 }
@@ -169,36 +233,4 @@ nav li:hover{
   .alert-answer{font-size: 2rem;}
 }
 
-.a{
-  background-color: #aaa;
-  margin: 50px;
-  padding: 20px;
-}
 
-.menu-container{
-  width: 30%;
-  text-align: center;
-  margin: auto;
-  margin-top: 50px;
-  overflow-x: hidden;
-  /* background-color: #aaa; */
-}
-
-.menu-container li{
-  list-style: none;
-  margin-bottom: 40px;
-  font-size: 4rem;
-  color: black;
-}
-
-.menu-container li:hover{
-  cursor: pointer;
-  /* border-bottom: 3px solid coral; */
-  animation-name: 밑줄;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  color: coral;
-  border-bottom: 3px solid coral;
-  transform: scale(1.2);
-  transition: all 0.3s;
-}
