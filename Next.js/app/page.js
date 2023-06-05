@@ -1,15 +1,7 @@
-import { connectDB } from "@/util/database.js";
-
-export default async function Home() {
-
-  const client = await connectDB;
-  const db = client.db("forum");
-  let result = await db.collection('post').find().toArray();
-  // console.log(result);
-
+export default function Home() {
   return (
-    <div>
-      <h2>Home</h2>
-    </div>
+    <main>
+      <h2>메인 페이지</h2>
+    </main>
   )
 }

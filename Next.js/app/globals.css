@@ -1,51 +1,96 @@
 body{
   margin: 0;
-}
-
-.navbar{
   background-color: #303030;
-  padding: 20px;
-  text-align: center;
 }
 
-.navbar a{
-  color: coral;
+nav{
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 30px;
+  background-color: #903090;
+  font-size: 1.5rem;
+}
+
+nav a{
   text-decoration: none;
+  color: whitesmoke;
+}
+
+.상품-container{
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  /* align-items: center; */
   margin: 20px;
 }
 
-.list-container, .detail-container, .write-container{
+.상품{
+  cursor: pointer;
+  width: 350px;
+  border: 2px solid white;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.상품 img{
+  width: 100%;
+}
+
+.상품:hover{
+  transform: scale(1.03);
+  transition: all 0.5s;
+}
+
+.tag{
+  text-align: center;
+  color: #aaa;
+  border: 1px solid #aaa;
+  width: 20%;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.name{
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.price{
+  text-align: center;
+  font-size: 1rem;
+}
+
+.장바구니-container{
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  margin: 40px;
+}
+
+.장바구니-title{
+  border: 3px solid white;
+  padding: 30px;
+  width: 20%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.장바구니{
   width: 50%;
   margin: auto;
+  margin-top: 80px;
+  border-collapse: collapse;
+  /* border-bottom: 1px solid white; */
 }
 
-.list-title, .detail-title, .write-title{
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-}
-
-.list-item{
-  border: 2px solid #303030;
-  border-radius: 10px;
-  margin: 20px;
-  padding: 20px;
-  box-shadow: #303030 10px 10px 5px 0px;
-}
-
-.list-item a{
-  text-decoration: none;
-  color: black;
-}
-
-.detail-item{
-  border: 5px solid #303030;
-  border-radius: 10px;
-  margin: 20px;
+th, tr, td{
+  border-bottom: 1px solid whitesmoke;
   padding: 20px;
 }
 
-.list-item:hover{
-  transform: scale(1.02);
+.orderBtn{
+  padding: 10px;
 }
