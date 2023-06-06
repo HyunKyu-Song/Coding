@@ -1,38 +1,27 @@
-export default function Cart(props) {
-   let product = [
-      {
-         model: '모니터',
-         price: '187,100'
-      },
-      {
-         model: '키보드',
-         price: '31,790'
-      },
-      {
-         model: '마우스',
-         price: '24,900'
-      },
-   ];
-   return (
-      <div>
-         <h2 className="title">Cart</h2>
-         {
-            product.map(function(item, i){
-               return(
-                  <CartList product={product} item={item} i={i}/>
-               )
-            })
-         }
-      </div>
-   )
-}
+import Amount from "./Amount";
 
-function CartList(props) {
+export default function Cart() {
+   
    return (
-      <div className="cart-item">
-         <p>{props.item.model}</p>
-         <p>{props.item.price}</p>
-         <p>1개</p>
-      </div>
+      <>
+         <div className="장바구니-container">
+            <div className="장바구니-title">
+               장바구니 페이지
+            </div>
+            <table className="장바구니">
+               <thead>
+                  <tr>
+                     <th>상품명</th>
+                     <th>가격</th>
+                     <th>수량</th>
+                     <td></td>
+                  </tr>
+               </thead>
+               <tbody>
+                  <Amount />
+               </tbody>
+            </table>
+         </div>
+      </>
    )
 }
