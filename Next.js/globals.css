@@ -122,10 +122,17 @@ th, tr, td{
   border: #2391ff 1px solid;
 }
 
-.hide{
-  display: none;
-}
-
-.show{
-  display: inline;
+.alertBox{
+  width: 50%;
+  height: 100px;
+  position: absolute;
+  background-color: rgba(0, 140, 255, 0.343);
+  text-align: center;
+  font-size: 2rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 20px;
 }

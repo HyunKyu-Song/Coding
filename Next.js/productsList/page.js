@@ -1,3 +1,4 @@
+import AlertBox from "./AlertBox";
 import OrderBtn from "./OrderBtn";
 
 export default function ProductsList() {
@@ -37,6 +38,7 @@ export default function ProductsList() {
    return (
       <>
          <div className="상품-container">
+            {/* <AlertBox/> */}
             {
                product.map(function (item, i) {
                   return (

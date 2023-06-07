@@ -1,7 +1,7 @@
 'use client'
 
 import { useDispatch, useSelector } from "react-redux";
-import { DecrementAmount, DeleteProduct, IncrementAmount } from "../GlobalRedux/store";
+import { DecrementAmount, DeleteAmount, DeleteProduct, IncrementAmount } from "../GlobalRedux/store";
 
 function Amount() {
 
@@ -26,6 +26,7 @@ function Amount() {
                            }}>➕</button> <button onClick={() => {
                               if (data.amount[i] <= 1) {
                                  dispatch(DeleteProduct(i));
+                                 dispatch(DeleteAmount(i))
                               }
                               else{
                                  dispatch(DecrementAmount(i))
