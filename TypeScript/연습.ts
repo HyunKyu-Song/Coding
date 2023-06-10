@@ -96,5 +96,12 @@ let obj2 :B = {
    birth :98
 }
 
-console.log(obj1)
-console.log(obj2)
+// console.log(obj1)
+// console.log(obj2)
+
+
+function func3(...inp :(number | string | boolean)[]){
+   console.log(inp)
+}
+
+func3(1, 2, 3, 4, 5)
