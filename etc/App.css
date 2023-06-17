@@ -1,0 +1,24 @@
+img{
+   opacity: 0;
+}
+
+img:hover{
+   opacity: 1;
+   transition: all 0.4s;
+}
+
+.title{
+   text-align: center;
+   font-size: 50px;
+   font-weight: bold;
+}
+
+.box-container{
+
+   width: 700px;
+   height: 700px;
+   background-color: #C9CDC7;
+   margin: auto;
+   border-radius: 20px;
+   position: relative;
+}

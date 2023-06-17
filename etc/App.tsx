@@ -1,33 +1,28 @@
 /*eslint-disable*/
 
-import { useState } from 'react';
-import './App.css';
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import './style/App.css';
+import './style/Menu.css';
+import Menu from './Menu';
 
 function App() {
   let [cnt, setCnt] = useState<number>(0);
   let [data, setData] = useState([]);
-  let [data2, setData2] = useState();
+
   return (
     <div className="App">
-      <button onClick={()=>{
-        fetch('https://hyunkyu-song.github.io/game/quizDataWoman.json')
-        .then(function(data){
-          return data.json();
-        })
-        .then(function(res){
-          console.log(res)
-          setData(res)
-          // console.log(data);
-        })
-        .catch(function(){
-          console.log('fail')
-        })
-      }}>버튼</button>
-      <button onClick={()=>{
-        // console.log(data2)
-        setData2(data)
-      }}>btn</button>
-      { data2 ?? <div>loading...</div>}
+      <h2 className='title'>철가방 Quiz</h2>
+      <div className='box-container'>
+        <Menu />
+
+      </div>
+
+      <Routes>
+        <Route path='/a' element={<div>apple</div>} />
+      </Routes>
+
+      <img width={500} src='https://hyunkyu-song.github.io/GoodsShop/NewJeans/%ED%95%98%EB%8B%88.jpg'></img>
     </div>
   );
 }
