@@ -1,0 +1,22 @@
+.container{
+   display: grid;
+   grid-template-columns: 300px 300px 300px;
+   grid-template-rows: 300px 300px 300px;
+}
+
+.container div{
+   border: 1px solid black;
+}
+
+.box1{
+   grid-column: 1/4;
+}
+
+.box2{
+   grid-row: 2/4;
+}
+
+.box3{
+   grid-row: 2/4;
+   grid-column: 2/4;
+}

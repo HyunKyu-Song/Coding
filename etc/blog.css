@@ -1,0 +1,49 @@
+body{
+   margin: 0;
+   height: 2000px;
+}
+
+.container{
+   width: 1000px;
+   height: 300px;
+   margin: 50px;
+   padding: 30px;
+   border-radius: 10px;
+   border: 1px solid black;
+}
+
+.content{
+   float: left;
+   width: 70%;
+   height: 100%;
+}
+
+.profile-img{
+   float: left;
+}
+
+.profile-img img{
+   border-radius: 50%;
+   margin-right: 20px;
+}
+
+.time{
+   color: #aaa;
+   font-size: 13px;
+   margin-bottom: 20px;
+}
+
+.title{
+   font-weight: bold;
+   font-size: 20px;
+}
+
+p{
+   color: gray;
+}
+
+.img{
+   float: right;
+   width: 30%;
+   height: 100%;
+}

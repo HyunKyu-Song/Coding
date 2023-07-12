@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./연습.css">
+   <title>Document</title>
+</head>
+
+<body>
+   <div class="alert-box">hello</div>
+   <button class="btn">change</button>
+
+   <script>
+      var x = 0;
+      document.querySelector('.btn').addEventListener('click', function(){
+         if(x % 2 == 0)
+            document.querySelector('.alert-box').innerHTML = 'bye';
+         else
+            document.querySelector('.alert-box').innerHTML = 'hi';
+         x++;
+      })
+   </script>
+</body>
+
+</html>

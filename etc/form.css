@@ -1,0 +1,35 @@
+body{
+   margin: 0;
+}
+
+fieldset{
+   position: absolute;
+   left: 0;
+   right: 0;
+   margin: auto;
+}
+
+.firstName, .lastName{
+   float: left;
+   width: 50%;
+}
+
+.email input, .firstName input, .lastName input, textarea{
+   width: 95%;
+   margin-top: 5px;
+   margin-bottom: 15px;
+   height: 25px;
+}
+
+.firstName input, .lastName input{
+   width: 90%;
+}
+
+.checkBox, .send-btn{
+   float: left;
+   width: 48%;
+}
+
+.send-btn{
+   text-align: end;
+}
