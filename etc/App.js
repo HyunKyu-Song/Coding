@@ -1,49 +1,45 @@
 /*eslint-disable*/
+
 import { useState } from 'react';
 import './App.css';
 import { create } from 'zustand';
 
 const useStore = create((set)=>({
-  a : 10,
-  b: 20,
-  Plus(){
-    set((state)=> ({a : state.a + 10}))
+  cnt : 0,
+  PlusLikes(){
+    set((state) => ({cnt : state.cnt + 1}))
+  },
+  MinusLikes(){
+    set((state) => ({cnt : state.cnt - 1}))
   }
 }))
 
-// const useStore = create(function () {
-//   return {
-//     a: 10,
-//     b: 20
-//   }
-// })
 
 function App() {
-  let [num, setNum] = useState(0);
-  const { a, b, Plus } = useStore();
+  let [likes, setLikes] = useState('🤍');
+  let [n, setN] = useState(0);
+  const {cnt, PlusLikes, MinusLikes} = useStore();
+  console.log(useStore())
 
   return (
-    <div>
-      <div>{a}</div>
-      <button onClick={() => {
-        // setNum(num + b)
-        // useStore.setState({a : a-1})
-        // useStore.setState({b : b-2})
-        Plus()
-        console.log(a)
-      }}>좋아요 {num}</button>
-      <div>
-        <Card/>
+    <div className='card-container'>
+      <div className='card'>
+        <button className='btn' onClick={() => {
+          if (n == 0) {
+            setLikes('💖');
+            setN(1)
+            PlusLikes();
+          }
+          else {
+            setLikes('🤍');
+            setN(0)
+            MinusLikes();
+          }
+        }}>좋아요 {cnt} {likes}</button>
       </div>
     </div>
   );
 }
 
-function Card() {
-  const {a, b, Plus} = useStore();
-  return (
-    <div>Card !! {b}</div>
-  )
-}
 
 export default App;
