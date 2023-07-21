@@ -16,14 +16,27 @@ const useStore = create((set)=>({
 
 
 function App() {
+  const {cnt, PlusLikes, MinusLikes} = useStore();
+
+  return (
+    <div>
+      <div>
+        App에 있는 값: {cnt}
+      </div>
+      <button onClick={()=>{PlusLikes()}}>Plus</button> <button onClick={()=>{MinusLikes()}}>Minus</button>
+      <Likes/>
+    </div>
+  );
+}
+
+function Likes(){
   let [likes, setLikes] = useState('🤍');
   let [n, setN] = useState(0);
   const {cnt, PlusLikes, MinusLikes} = useStore();
-  console.log(useStore())
-
-  return (
+  return(
     <div className='card-container'>
       <div className='card'>
+        <h2>Likes Component에 있는 값</h2>
         <button className='btn' onClick={() => {
           if (n == 0) {
             setLikes('💖');
@@ -38,8 +51,7 @@ function App() {
         }}>좋아요 {cnt} {likes}</button>
       </div>
     </div>
-  );
+  )
 }
-
 
 export default App;
