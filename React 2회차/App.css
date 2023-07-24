@@ -1,0 +1,40 @@
+.App{
+  margin: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.black-nav {
+  background: black;
+  width: 100%;
+  display: flex;
+  color: white;
+  padding: 20px;
+}
+
+div {
+  box-sizing: border-box
+}
+
+.list {
+  text-align: left;
+  padding-left: 20px;
+  border-bottom: 1px solid grey;
+}
+
+.btn{
+  border-radius: 20px;
+  border: none;
+}
+
+.modalBox{
+  margin-top : 20px;
+  padding : 20px;
+  background : #eee;
+  text-align : left;
+  display: none;
+}
+
+.show{
+  display: block;
+}
