@@ -13,14 +13,14 @@ export default function Write() {
    };
 
    return (
-      <div>
-         <Form
-            name="basic"
+      <div className='form-container'>
+         <h2 style={{textAlign:'center', margin:'50px 0'}}>오늘의 할 일은?</h2>
+         <Form name="basic"
             labelCol={{
-               span: 8,
+               span: 7,
             }}
             wrapperCol={{
-               span: 16,
+               span: 10,
             }}
             initialValues={{
                remember: true,
@@ -30,52 +30,36 @@ export default function Write() {
             autoComplete="off"
          >
             <Form.Item
-               label="Username"
+               label="할 일"
                name="username"
                rules={[
                   {
                      required: true,
-                     message: 'Please input your username!',
+                     message: '할 일을 적어주세요.',
                   },
                ]}
             >
-               <Input />
+               <Input className='input' placeholder='ex) 운동하기'></Input>
             </Form.Item>
 
             <Form.Item
-               label="Password"
+               label="날짜"
                name="password"
-               rules={[
-                  {
-                     required: true,
-                     message: 'Please input your password!',
-                  },
-               ]}
+               // rules={[
+               //    {
+               //       required: true,
+               //       message: 'Please input your password!',
+               //    },
+               // ]}
             >
-               <Input.Password />
+               <Input className='input' placeholder='ex) 2023-07-25'></Input>
+               {/* <Input.Password /> */}
             </Form.Item>
 
-            <Form.Item
-               name="remember"
-               valuePropName="checked"
-               wrapperCol={{
-                  offset: 8,
-                  span: 16,
-               }}
-            >
-               <Checkbox>Remember me</Checkbox>
+            <Form.Item style={{textAlign:'center'}} wrapperCol={{offset: 0,}}>
+               <Button className='btn'  type="primary" htmlType="submit">저장</Button>
             </Form.Item>
-
-            <Form.Item
-               wrapperCol={{
-                  offset: 8,
-                  span: 16,
-               }}
-            >
-               <Button type="primary" htmlType="submit">
-                  Submit
-               </Button>
-            </Form.Item>
+            
          </Form>
       </div>
    )
