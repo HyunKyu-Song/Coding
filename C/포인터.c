@@ -2,24 +2,24 @@
 
 int main(void){
 	
-	int x = 10;
+	int x = 20;
 	int *p = &x;
 	
-	printf("<ÁÖ¼Ò>\n\n");
+	printf("<ÃÃ–Â¼Ã’>\n\n");
 	printf("x = &%d\n", &x);
 	printf("p = %d\n\n\n", p);
 	
-	printf("<º¯°æ Àü>\n\n");
+	printf("<ÂºÂ¯Â°Ã¦ Ã€Ã¼>\n\n");
 	printf("x = %d\n", x);
 	printf("*p = %d\n\n\n", *p);
 	
 	*p = 20;
 	
-	printf("<ÁÖ¼Ò>\n\n");
+	printf("<ÃÃ–Â¼Ã’>\n\n");
 	printf("x = &%d\n", &x);
 	printf("p = %d\n\n\n", p);
 	
-	printf("<º¯°æ ÈÄ>\n\n");
+	printf("<ÂºÂ¯Â°Ã¦ ÃˆÃ„>\n\n");
 	printf("x = %d\n", x);
 	printf("*p = %d\n", *p);
 		
