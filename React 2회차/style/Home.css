@@ -1,0 +1,54 @@
+.home-container{
+   text-align: center;
+   margin: 50px 0;
+   font-family: 'Kalam', cursive;
+}
+
+.home-title{
+   font-weight: 700;
+   width: 30%;
+   margin: auto;
+   font-size: 2rem;
+   border-bottom: 2px solid black;
+}
+
+.skill-container{
+   margin-top: 50px;
+   padding: 50px 0;
+   /* border-bottom: 1px solid black; */
+}
+
+.skill{
+   font-weight: 500;
+}
+
+.skill-list{
+   list-style: none;
+   display: flex;
+   justify-content: center;
+}
+
+.skill-list li{
+   /* cursor: pointer; */
+   margin: 30px;
+   font-size: 1.2rem;
+}
+
+.skill-list li:hover{
+   transform: translateY(-5px);
+   transition: all 0.3s;
+}
+
+.reason{
+   /* background-color: rgba(0, 0, 0, 0.763); */
+   color: black;
+   font-size: 1.5rem;
+   font-weight: 300;
+   /* margin: 50px 0; */
+   padding: 25px 0;
+   /* border: 1px solid black; */
+   width: 35%;
+   margin: auto;
+   border-radius: 15px;
+   /* border-bottom: 1px solid black; */
+}

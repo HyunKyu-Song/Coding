@@ -1,0 +1,16 @@
+.workList-container{
+   width: 60%;
+   margin: auto;
+   margin-top: 50px;
+   padding-bottom: 100px;
+}
+
+.list-item{
+   cursor: pointer;
+   padding: 20px 0;
+   font-weight: 500;
+   padding: 30px;
+   border-radius: 20px;
+   margin: 20px;
+   background-color: rgba(0, 0, 0, 0.05);
+}
