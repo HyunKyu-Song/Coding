@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/list', (req, res) => {
+app.get('/workList', (req, res) => {
 
    connection.connect();
    connection.query(`
@@ -60,7 +60,40 @@ app.post('/add', (req, res) => {
 
    // connection.end();
 
-   res.redirect('http://localhost:3000');
+   res.redirect('http://localhost:3000/list');
+   // res.redirect('/');
+   console.log(req.body)
+});
+
+app.post('/update', (req, res)=>{
+   connection.connect();
+   connection.query(`
+   UPDATE post
+   SET post_work = '${req.body.work}'
+   WHERE post_id = ${req.body.post_id}`
+      , function (error, results, fields) {
+         if (error) throw (error);
+      });
+
+   // connection.end();
+
+   res.redirect('http://localhost:3000/list');
+   // res.redirect('/');
+   console.log(req.body)
+});
+
+app.delete('/delete', (req, res)=>{
+   connection.connect();
+   connection.query(`
+   DELETE FROM post
+   WHERE post_id = ${req.body.post_id}`
+      , function (error, results, fields) {
+         if (error) throw (error);
+      });
+
+   // connection.end();
+
+   res.redirect('http://localhost:3000/list');
    // res.redirect('/');
    console.log(req.body)
 });
