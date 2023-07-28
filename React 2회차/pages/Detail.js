@@ -1,6 +1,6 @@
 /*eslint-disable*/
 
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card, Row, Col, Button } from 'antd';
@@ -11,27 +11,22 @@ export default function Detail() {
    let [val, setVal] = useState([]);
    let [real, setReal] = useState([]);
    let [show, setShow] = useState(false);
+   let navigate = useNavigate();
+
    useEffect(() => {
-      axios.get('http://localhost:8080/list')
+      axios.get('http://localhost:8080/worklist')
          .then((res) => {
             setVal(res.data);
-            console.log('res.data', res.data);
-            console.log('val', val);
          })
          .catch(() => console.log('fail~!~!~!'));
    }, [])
-   // 데이터 삭제 시 post_id는 전 값에 +1해주는데 id값은 idx순서라서 바이딩 잘못됨
-
-   // async await으로 해볼 수 있을지도?
 
    setTimeout(() => {
-      console.log('0.1초 뒤 val값: ', val);
 
       function findId(element) {
          return element.post_id == id;
       }
       setReal(val.find(findId))
-      console.log(real);
 
       setTimeout(() => {
          setShow(true)
@@ -46,7 +41,7 @@ export default function Detail() {
                // val === null ? <div>Loading...</div> :
                <Row>
                   <Col style={{ textAlign: 'center' }} span={12} offset={6}>
-                     <h1>Detail Page</h1>
+                     <h1 className="title">Detail Page</h1>
                   </Col>
                   <Col className="detail-content" span={12} offset={6}>
                      <p>글 id: {real.post_id}</p>
@@ -56,9 +51,19 @@ export default function Detail() {
                      <p>할 일: {val[id - 1].post_work}</p>
                      <p>날짜: {val[id - 1].date}</p> */}
                      <Button onClick={() => {
-                        console.log('val', val);
+                        navigate(`/update/${real.post_id}`);
                      }} className="btn" type="primary">수정</Button>
-                     <Button className="btn" type="danger">삭제</Button>
+                     <Button onClick={() => {
+                        // let id = parseInt(real.post_id);
+                        axios.delete('http://localhost:8080/delete', {
+                           data:{
+                              post_id : `${real.post_id}`
+                           }
+                        })
+                        .then((res)=>{console.log(res.data)})
+                        .catch((err)=> console.log('에러!', err))
+                        // 삭제는 되는데, 404 error 뜸
+                     }} className="btn" type="danger">삭제</Button>
                   </Col>
                </Row>
          }

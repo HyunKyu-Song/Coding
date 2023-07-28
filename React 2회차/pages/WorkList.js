@@ -30,13 +30,14 @@ export default function WorkList() {
                   itemLayout="horizontal"
                   dataSource={val}
                   renderItem={(item, i) => (
-                     <List.Item className='list-item' onClick={()=>{navigate(`/detail/${item.post_id}`)}}>
+                     <List.Item className='list-item' onClick={() => { navigate(`/detail/${item.post_id}`) }}>
+                        No.{i + 1}
                         <List.Item.Meta
                            title={item.post_work}
                            description={item.date}
                         />
-                        <Button className='btn' type='primary'>수정</Button>
-                        <Button className='btn' type='danger'>삭제</Button>
+                        {/* <Button className='btn' type='primary'>수정</Button>
+                        <Button className='btn' type='danger'>삭제</Button> */}
                      </List.Item>
                   )}
                />
