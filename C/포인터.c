@@ -2,7 +2,7 @@
 
 int main(void){
 	
-	int x = 20;
+	int x = 2;
 	int *p = &x;
 	
 	printf("<ÁÖ¼Ò>\n\n");
