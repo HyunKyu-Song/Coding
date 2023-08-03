@@ -1,3 +1,14 @@
+.box{
+   margin: 15px;
+   background-color: coral;
+   border-radius: 20px;
+   text-align: center;
+}
+
+.custom-btn{
+   background-color: coral;
+}
+
 .card{
    width: 500px;
    margin: auto;
