@@ -1,0 +1,165 @@
+.input_email_container {
+   position: relative;
+}
+
+.user_email_label {
+   position: absolute;
+   top: 20px;
+   left: 18px;
+   color: #757575;
+   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+   transition: all 0.3s ease-in-out;
+}
+
+.user_email_focus {
+   top: 10px;
+   left: 19px;
+   color: #E50914;
+   font-size: 12px;
+   line-height: 18px;
+   font-weight: bold;
+   letter-spacing: -0.006px;
+}
+
+.input_email_wrapper {
+   display: flex;
+   flex-flow: row nowrap;
+}
+
+.user_email {
+   box-sizing: border-box;
+   width: 540px;
+   height: 60px;
+   padding: 26px 20px 10px;
+   border: none;
+   outline: none;
+}
+
+.user_email_invalid {
+   /* display: block; */
+   display: none;
+   border-top: 3px solid #E50914;
+   position: absolute;
+   color: #E50914;
+   font-size: 14px;
+   font-weight: bold;
+   line-height: 21px;
+   letter-spacing: -0.007px;
+   width: 520px;
+   top: 57px;
+   padding-top: 5px;
+   padding-left: 20px;
+}
+
+.input_email_container .btn_arrow {
+   width: 210px;
+   height: 60px;
+   border-radius: none;
+}
+
+.input_email_container .btn_arrow {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   column-gap: 10px;
+}
+
+.show {
+   display: block;
+}
+
+
+@media (max-width: 768px) {
+   .input_email_container {
+      display: inline-block;
+   }
+
+   .user_email_label {
+      position: absolute;
+      color: #757575;
+      font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+      transition: all 0.3s ease-in-out;
+
+
+      top: 10px;
+      left: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: -0.007px;
+   }
+
+   .user_email_focus {
+      color: #E50914;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: bold;
+      letter-spacing: -0.006px;
+
+
+      top: -23px;
+      left: 16px;
+   }
+
+   .input_email_wrapper {
+      flex-flow: column;
+      align-items: center;
+      row-gap: 12px;
+   }
+
+   .user_email {
+      box-sizing: border-box;
+
+      padding: 10px 20px 10px;
+      width: 245px;
+      height: 40px;
+      border-radius: 30px;
+      /* border: 1px solid #000; */
+   }
+
+   .user_email_invalid {
+      /* display: block; */
+      display: none;
+      border-top: none;
+      position: absolute;
+      width: auto;
+      top: 46px;
+      padding-top: 2px;
+      padding-left: 15px;
+   }
+
+
+   .input_email_container .btn_arrow {
+
+      width: 160px;
+      height: 40px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: -0.007px;
+   }
+
+   /* .input_email_container .btn_arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+   } */
+
+   .show {
+      display: block;
+   }
+
+
+   /* focus되면 input에 적용 */
+   .user_email_focus_mobile {
+      height: 46px;
+      border: 3px solid #E50914;
+   }
+
+   /* focus되면 버튼에 적용 */
+   .btn_arrow_focus {
+      transform: translateY(20px);
+   }
+}

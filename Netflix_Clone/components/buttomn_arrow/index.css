@@ -1,0 +1,33 @@
+.btn_arrow_container {
+   display: flex;
+   flex-flow: column nowrap;
+   gap: 20px;
+}
+
+.btn_arrow {
+   width: 113px;
+   height: 56px;
+   background: #E50914;
+   color: #FFF;
+   border: none;
+   text-align: center;
+   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+   font-size: 22px;
+   font-weight: 400;
+   line-height: 26px;
+}
+
+.btn_arrow:hover {
+   background: #B70710;
+}
+
+.btn_arrow:focus {
+   border: 3px solid #58E590;
+   background: #B70710;
+   outline: 0;
+}
+
+.btn_arrow.btn_arrow_disabled_left,
+.btn_arrow.btn_arrow_disabled_right {
+   background: #757575;
+}
