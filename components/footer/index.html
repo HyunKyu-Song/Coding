@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>푸터 컴포넌트</title>
+   <!-- 상대경로로 components.css 연결 -->
+   <link rel="stylesheet" href="./../../styles/components.css">
+</head>
+
+<body>
+   <div style="background-color: #000; padding: 50px;">
+      <footer class="footer">
+
+         <div class="footer_ask_wrapper">
+            <div class="footer_ask">질문이 있으신가요&#63;</div>
+            <div class="footer_ask">문의 전화&#58; <a href="tel: +82-0-308-321-0058">00-308-321-0058</a></div>
+         </div>
+
+         <div role="link" class="footer_nav">
+            <a href="/">자주 묻는 질문</a>
+            <a href="/">고객센터</a>
+            <a href="/">계정</a>
+            <a href="/">미디어 센터</a>
+            <a href="/">투자 정보 &#40;<span lang="en-US">IR</span>&#41;</a>
+            <a href="/">입사 정보</a>
+            <a href="/"><span lang="en-US">Netflix</span> 지원 디바이스</a>
+            <a href="/">이용 약관</a>
+            <a href="/">개인정보</a>
+            <a href="/">쿠키 설정</a>
+            <a href="/">회사 정보</a>
+            <a href="/">문의하기</a>
+            <a href="/">속도 테스트</a>
+            <a href="/">법적 고지</a>
+            <a href="/"><span lang="en-US">Netflix</span> 오리지널</a>
+         </div>
+
+         <button class="select_btn" data-val="onOff">
+
+            <span class="global_icon" data-val="onOff"></span>
+            <span class="state_lang" data-val="onOff">한국어</span>
+            <span class="select_down_icon" data-val="onOff"></span>
+
+            <div class="select_lang hide_none">
+               <div class="check_icon_wrapper">
+                  <span class="check_icon ko"></span>
+                  <span class="check_icon en hide_hidden"></span>
+               </div>
+
+               <div class="lang">
+                  <span class="lang_ko">한국어</span>
+                  <span class="lang_en">English</span>
+               </div>
+            </div>
+
+         </button>
+
+         <address class="footer_address">
+            <div>Netflix 대한민국</div>
+            <div>넷플릭스서비시스코리아 유한회사</div>
+            <div>통신판매업신고번호: 제2018-서울종로-0426호</div>
+            <div>전화번호: <a href="tel: +82-0-308-321-0058">00-308-321-0058</a></div>
+            <div>대표: 레지널드 숀 톰프슨</div>
+            <div>이메일 주소: <a href="mailto:korea@netflix.com">korea@netflix.com</a></div>
+            <div>주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161</div>
+            <div>사업자 등록번호: 165-87-00119</div>
+            <div>클라우드 호스팅: Amazon Web Services Inc.</div>
+            <div>공정거래위원회 웹사이트</div>
+         </address>
+
+      </footer>
+   </div>
+
+   <script src="./../select/index.js"></script>
+</body>
+
+</html>
