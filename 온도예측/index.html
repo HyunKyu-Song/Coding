@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>온도 예측</title>
+   <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+   <h1>온도 예측</h1>
+
+   <button class="run_btn">run</button>
+   <canvas id="myChart"></canvas>
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+   <script>
+      document.querySelector('.run_btn').addEventListener('click', () => {
+         fetch('https://api.open-meteo.com/v1/forecast?latitude=37.566&longitude=126.9784&hourly=temperature_2m&timezone=Asia%2FTokyo')
+            .then((res) => {
+               return res.json();
+            })
+            .then((res) => {
+               const ctx = document.getElementById('myChart');
+
+               new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                     labels: res.hourly.time,
+                     datasets: [{
+                        label: '온도',
+                        data: res.hourly.temperature_2m,
+                        borderColor: 'rgba(97, 218, 251)',
+                        backgroundColor: 'rgba(97, 218, 251, 0.514)',
+                        pointRadius: 8,
+                        pointHoverRadius: 10,
+                        pointHoverBackgroundColor: 'red'
+                     }]
+                  },
+                  options: {
+                     responsive: false,
+                     scales: {
+                        y: {
+                           beginAtZero: true
+                        }
+                     }
+                  }
+               });
+               console.log(res.hourly)
+            })
+            .catch((error) => console.log("에러: ", error));
+      });
+   </script>
+</body>
+
+</html>
